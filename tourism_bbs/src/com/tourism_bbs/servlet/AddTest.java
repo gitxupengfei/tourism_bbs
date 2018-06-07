@@ -28,14 +28,14 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  * Servlet implementation class AddUserServlet
  */
 
-public class AddUserServlet extends HttpServlet {
+public class AddTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	//从request获取各属性的值
 		//String userId=request.getParameter("userId");
 		request.setCharacterEncoding("utf-8");
-		request.setAttribute("photo", null);
+		
 		//获得磁盘文件条目工厂  
         DiskFileItemFactory factory = new DiskFileItemFactory();  
         //获取文件需要上传到的路径  
@@ -69,9 +69,8 @@ public class AddUserServlet extends HttpServlet {
                 if(item.isFormField())  
                 {                     
                     //获取用户具体输入的字符串 ，名字起得挺好，因为表单提交过来的是 字符串类型的  
-                	
-                	String value = new String(item.getString().getBytes("iso-8859-1"),"utf-8") ;  
-                     System.out.println(value); 
+                    String value = item.getString() ;  
+                      
                     request.setAttribute(name, value);  
                 }  
                 //对传入的非 简单的字符串进行处理 ，比如说二进制的 图片，电影这些  
@@ -81,11 +80,12 @@ public class AddUserServlet extends HttpServlet {
                      * 以下三步，主要获取 上传文件的名字 
                      */  
                     //获取路径名  
-                    String value = item.getName() ; 
+                    String value = item.getName() ;  
                     //索引到最后一个反斜杠  
                     int start = value.lastIndexOf("\\");  
                     //截取 上传文件的 字符串名字，加1是 去掉反斜杠，  
                     String filename = value.substring(start+1);  
+                   
                     request.setAttribute("photo", filename);  
                       
                     //真正写到磁盘上  
@@ -143,10 +143,6 @@ public class AddUserServlet extends HttpServlet {
 		String QQ=(String) request.getAttribute("QQ");
 		String introduce=(String) request.getAttribute("introduce");
 		String photoPath=(String) request.getAttribute("photo");
-		//用户未选择图像则选用默认图像代替。
-		if(photoPath==null){
-			photoPath="default.jpg";
-		}
 		
 		UserBean userBean=new UserBean();
 		//属性赋值

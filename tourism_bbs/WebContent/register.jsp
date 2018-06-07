@@ -68,7 +68,7 @@
 	                //Firefox 因安全性问题已无法直接通过input[file].value 获取完整的文件路径
 	                try {
 	                    //Firefox7.0
-	                    imgURL = file.getAsDataURL();
+	                    imgURL = file.getAsDataURL();//转为base64编码
 	                    //alert("//Firefox7.0"+imgRUL);
 	                } catch (e) {
 	                    //Firefox8.0以上
@@ -85,20 +85,118 @@
 	                    reader.readAsDataURL(node.files[0]);
 	                }
 	            }
+	            
 	            return imgURL;
+	           
 	        }
 	      
-		
+	
+		 
+	        
+
 	
 		 $("#file").change(function () {
 			 var filePath=getObjectURL(obj);
 			$("#photoPath").val(filePath);
-		alert(filePath);
+			
+			
 	            $("#addphoto").attr("src", filePath);//将图片的src变为获取到的路径
 	        	
 		 });
 	
 	});
+	
+	function isRegisterValidate(form){
+		 document.charset="utf-8";
+		 userName=form.register_username.value;
+		 password=form.register_password.value;
+		 question1=form.question1.value;
+		 answer1=form.answer1.value;
+		 question2=form.question2.value;
+		 answer2=form.answer2.value;
+		 school=form.school.value;
+		 telephone=form.phone.value;
+		 QQ=form.QQ.value;
+		 introduce=form.introduce.value;
+		 var  difpassword= document.getElementById("difpassword").innerText;
+		 var  errorphone= document.getElementById("errorphone").innerText;
+		 var  errorQQ= document.getElementById("errorQQ").innerText;
+		 var file=document.getElementById("file").value;
+		 if(userName.trim()==""){
+			 alert("用户名不能为空！");
+			 form.register_username.focus();
+			 return false;
+		 }
+		 if(password.trim()==""){
+			 alert("密码不能为空！");
+			 form.register_password.focus();
+			 return false;
+		 }
+		 if(question1.trim()==""){
+			 alert("密保问题不能为空！");
+			 form.question1.focus();
+			 return false;
+		 }
+		 if(answer1.trim()==""){
+			 alert("密保答案不能为空！");
+			 form.answer1.focus();
+			 return false;
+		 }
+		 if(answer2.trim()==""){
+			 alert("密保答案不能为空！");
+			 form.answer2.focus();
+			 return false;
+		 }
+		 if(question1.trim()==""){
+			 alert("密保问题不能为空！");
+			 form.question1.focus();
+			 return false;
+		 }
+		 if(school.trim()==""){
+			 alert("学校不能为空！");
+			 form.school.focus();
+			 return false;
+		 }
+		 if(telephone.trim()==""){
+			 alert("手机号码不能为空！");
+			 form.phone.focus();
+			 return false;
+		 }
+		 
+		 if(QQ.trim()==""){
+			 alert("QQ不能为空！");
+			 form.QQ.focus();
+			 return false;
+		 }
+		 if(introduce.trim()==""){
+			 alert("自我介绍不能为空！");
+			 form.introduce.focus();
+			 return false;
+		 }
+		 if(difpassword.trim()!=""){
+			 alert("前后密码不一致！");
+			 form.register_password.focus();
+			 return false;
+		 }
+		 if(errorphone.trim()!=""){
+			 alert("请输入正确的手机号码！");
+			 form.phone.focus();
+			 return false;
+		 }
+		 if(errorQQ.trim()!=""){
+			 alert("请输入正确的QQ！");
+			 form.QQ.focus();
+			 return false;
+		 }
+		 if(file.trim()==""){
+			 alert("请上传个性图像！");
+			 form.QQ.focus();
+			 return false;
+		 }
+		 return true;
+	
+	}
+	
 
 </script>
 <style type="text/css">
@@ -156,7 +254,7 @@
 	
 
 </div>
-<form name="form1" action="addUser" method="post">
+<form name="registerform" action="addUser" method="post" enctype="multipart/form-data" onsubmit="return isRegisterValidate(registerform)" accept-charset="UTF-8">
 <div id="line" >
 |&nbsp;注&nbsp;册&nbsp;论&nbsp;坛&nbsp;账&nbsp;号&nbsp;|
 </div>
@@ -170,22 +268,22 @@
 			
 		</tr>
 		<tr>
-			<td class="word">登录密码</td>
+			<td class="word">登录密码：</td>
 			<td><input type="password" name="register_password" class="in" id="login_password"><br></td>
 			<td></td>
 			
 		</tr>
 		<tr>
-			<td class="word">确认密码</td>
+			<td class="word">确认密码：</td>
 			<td><input type="password" class="in" name="confirm_password" id="confirm_password"><br></td>
-			<td><label id="difpassword"></label></td>
+			<td><label id="difpassword" ></label></td>
 		</tr>
 		<tr>
 			<td class="word">密保问题1：</td>
 			<td><input type="text" name="question1" class="in"><br></td>
 			<td rowspan="3" ><img alt="addphoto" src="images/addphoto.jpg" title="点击上传个性头像" id="addphoto" >
-			<input type="file" id="file" name="photoUpload"  style="display: none;">
-			<input type="hidden" name="photoPath" value="" id="photoPath">
+			<input type="file" accept="image/*" id="file" name="photoUpload"  style="display: none;">
+			
 			</td>
 		</tr>
 		<tr>
@@ -251,8 +349,7 @@
 					<option value="Shanghai">上海</option>
 					<option value="Tianjin">天津</option>
 					<option value="Chongqing">重庆</option>
-					<option value="Beijing">北京</option>
-					<option value="Hebei">河北</option>
+				    <option value="Hebei">河北</option>
 					<option value="Shanxi1">山西</option>
 					<option value="Neimenggu">内蒙古</option>
 					<option value="Liaoning">辽宁</option>

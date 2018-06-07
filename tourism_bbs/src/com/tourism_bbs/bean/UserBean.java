@@ -21,7 +21,7 @@ import javafx.scene.control.Alert;
 
 public class UserBean {
 	
-	
+	private int userId;
 	private String userName;
 	private String password;
 	private String question1;
@@ -128,6 +128,64 @@ public class UserBean {
 		
 	}
 	
+
+
+	/**
+	 *@Description：登录处理
+	 *@param username
+	 *@param password
+	 *@return: UserBean
+	 *@Author:xupengfei
+	 */
+	public UserBean login(String username,String password){
+		
+		DBBean dbBean=new DBBean();
+		Connection con=null;
+		ResultSet rs=null;
+		String sql="select userId,userName,password,photo,status from User_Table where userName='"+username+"'";
+		
+		try {
+			con=dbBean.getConnection();
+			rs=dbBean.executeQuery(sql);
+			if(rs.next()){
+				int rsuserId=rs.getInt(1);
+				String rsusername=rs.getString(2);
+				String rspassword=rs.getString(3);
+				String rsphoto=rs.getString(4);
+				
+				int rsstatus=rs.getInt(5);
+				if(password.equals(rspassword)){
+					UserBean userBean=new UserBean();
+					userBean.setUserId(rsuserId);
+					userBean.setUserName(rsusername);
+					userBean.setPasswrd(rspassword);
+					userBean.setPhotoPath(rsphoto);
+					userBean.setStatus(rsstatus);
+					return userBean;
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("数据库连接失败！");
+			System.out.println(e);
+		}
+		finally{
+			try {
+				dbBean.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return null;
+		
+		
+		
+		
+		
+	}
+	
 	/**
 	 * 
 	 *@Description：判断用户名是否存在
@@ -162,7 +220,179 @@ public class UserBean {
 		
 	}
 	
+	/**
+	 * 
+	 *@Description：根据id查询用户信息
+	 *@param userid
+	 *@return: UserBean
+	 *@Author:xupengfei
+	 */
+	public UserBean findUserById(String userid){
+		Connection con=null;
+		ResultSet rs=null;
+		DBBean db=new DBBean();
+		String sql="select * from User_Table where userId='"+userid+"'";
+		
+		try {
+			con=db.getConnection();
+			rs=db.executeQuery(sql);
+			if(rs.next()){
+				int rsUserId=rs.getInt(1);
+				String rsUserName=rs.getString(2);
+				String rsPassword=rs.getString(3);
+				String rsQuestion1=rs.getString(4);
+				String rsAnswer1=rs.getString(5);
+				String rsQuestion2=rs.getString(6);
+				String rsAnswer2=rs.getString(7);
+				String rsSex=rs.getString(8);
+				String rsAge=rs.getString(9);		
+				String rsHometown=rs.getString(10);
+				String rsSchool=rs.getString(11);
+				String rsTelephone=rs.getString(12);
+				String rsQQ=rs.getString(13);
+				String rsIntroduce=rs.getString(14);
+				String rsPhoto=rs.getString(15);
+				UserBean user=new UserBean();
+				user.setUserId(rsUserId);
+				user.setUserName(rsUserName);
+				user.setPasswrd(rsPassword);
+				user.setQuestion1(rsQuestion1);
+				user.setAnswer1(rsAnswer1);
+				user.setQuestion2(rsQuestion2);
+				user.setAnswer2(rsAnswer2);
+				user.setSex(rsSex);
+				user.setAge(rsAge);
+				user.setHometown(rsHometown);
+				user.setSchool(rsSchool);
+				user.setTelephone(rsTelephone);
+				user.setQQ(rsQQ);
+				user.setIntroduce(rsIntroduce);
+				user.setPhoto(rsPhoto);
+				return user;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				db.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		return null;
+		
+		
+		
+	}
 	
+	
+	/**
+	 *@Description：修改用户信息
+	 *@return
+	 *@throws Exception: int
+	 *@Author:xupengfei
+	 */
+	public int update() throws Exception{
+		Connection con=null;
+		ResultSet rs=null;
+		DBBean db=new DBBean();
+		StringBuffer sql=new StringBuffer()	;
+		sql.append("update User_Table set ");
+		sql.append("userName='");
+		sql.append(userName);
+		sql.append("',sex='");
+		sql.append(sex);
+		sql.append("',age='");
+		sql.append(age);
+		sql.append("',hometown='");
+		sql.append(hometown);
+		sql.append("',school='");
+		sql.append(school);
+		sql.append("',telephone='");
+		sql.append(telephone);
+		sql.append("',QQ='");
+		sql.append(QQ);
+		sql.append("',introduce='");
+		sql.append(introduce);
+		sql.append("',photo='");
+		sql.append(photo);
+		sql.append("'where userId='");
+		sql.append(userId);
+		sql.append("'");
+		try {
+			con=db.getConnection();
+			
+			return db.executeUpdate(sql.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		finally{
+			db.close();
+		}
+		
+		
+		return 0;
+		
+		
+	}
+	
+	/**
+	 *@Description：修改密码
+	 *@return
+	 *@throws Exception: int
+	 *@Author:xupengfei
+	 */
+	public int changePassword() throws Exception{
+		Connection con=null;
+		ResultSet rs=null;
+		DBBean db=new DBBean();
+		StringBuffer sql=new StringBuffer()	;
+		sql.append("update User_Table set ");
+		sql.append("password='");
+		sql.append(password);
+		sql.append("',question1='");
+		sql.append(question1);
+		sql.append("',answer1='");
+		sql.append(answer1);
+		sql.append("',question2='");
+		sql.append(question2);
+		sql.append("',answer2='");
+		sql.append(answer2);
+		sql.append("'");
+		try {
+			con=db.getConnection();
+			
+			return db.executeUpdate(sql.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		finally{
+			db.close();
+		}
+		
+		
+		return 0;
+	}
+	
+	public int getUserId() {
+	return userId;
+   }
+
+
+   public void setUserId(int userId) {
+	this.userId = userId;
+   }
+
 	public String getUserName() {
 		return userName;
 	}

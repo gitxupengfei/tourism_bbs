@@ -7,7 +7,10 @@
 <title>tourism_forum</title>
 <script src="jquery-3.3.1.js"></script>
 <script >
+
 $(document).ready(function(){
+	
+	
 	//菜单
 	  $("#menu").click(function(){
 	    $("#panel").slideToggle("slow");
@@ -17,11 +20,11 @@ $(document).ready(function(){
 	//个人中心页跳转
 	 $("#a_personalcenter").click(function(){
 		 
-		 window.location.href='personalcenter_self.jsp';
+		 window.top.location='spaceIframe.jsp';
 	 });
 	//返回主页
 	 $("#a_personalhome").click(function(){
-		 window.location.href='personalhome.jsp';
+		 window.top.location='personalhome.jsp';
 	 });
 	 
 	});
@@ -37,16 +40,17 @@ body{
   		height:150px;
   }
   #menu{
-        height:60px;
-        width:60px;
+        height:40px;
+        width:40px;
         position:absolute;
         top:0px;
         right:0px;
-      
+      	 cursor:pointer;
   }
   
   #head{
 		background-color:#1C86EE;
+		border-radius: 40px;
   
   }
   #headbg{
@@ -81,21 +85,22 @@ body{
 }
 </style>
 </head>
-<body>
+<body  >
 <div id="body"  >
   <div id="head">
 	
-	<img alt="menu" src="images/defaultphoto.jpg" title="点击查看菜单" id="menu">
+	<img alt="menu" src="userphoto/${sessionScope.photo}" title="点击查看菜单" id="menu">
+	
 	</div>
 	<img alt="大学生旅游论坛" src="images/headbg.jpg" id="headbg">
 
 <div id="panel" >
     <p>
-	<a href="javascript:;" id="a_personalcenter" class="a1">空间</a><br>
+	<a href="javascript:;" target="_top" id="a_personalcenter" class="a1">空间</a><br>
 	<p>
-	<a href="javascript:;" class="a1" id="a_personalhome">主页</a>
+	<a href="javascript:;" target="_top" class="a1" id="a_personalhome">主页</a>
 	<p>
-	<a href="javascript:if(confirm('您确定要退出当前用户吗?'))location='home.jsp'" class="a1" id="a_exit">注销</a>
+	<a href="javascript:if(confirm('您确定要退出当前用户吗?'))top.location='home.jsp'" target="top" class="a1" id="a_exit">注销</a>
 </div>
 </div>
 

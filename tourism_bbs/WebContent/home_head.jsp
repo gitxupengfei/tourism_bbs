@@ -16,7 +16,7 @@ $(document).ready(function(){
 	  $("#a_login").click(function(){
 		   
 		   
-		  $(".lock").css("height",$(window).height());     
+		  $(".lock").css("height",$(document).height());     
 		  $(".lock").css("width",$(window).width()); 
 		  $(".lock").show();
 
@@ -91,7 +91,7 @@ body{
   #login{
   	width:330px;
   	height:330px;
-  	left:40%;
+  	left:30%;
   	top:30%;
   	position:absolute;
   	display:none;

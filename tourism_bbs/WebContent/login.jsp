@@ -4,14 +4,33 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title></title>
+<script src="jquery-3.3.1.js"></script>
+<script type="text/javascript">
+	function isValidate(form){
+		username=form.username.value;
+		password=form.password.value;
+		if(username==""){
+			alert("请输入用户名！");
+			form.username.focus();
+			return false;
+		}
+		
+		if(password==""){
+			alert("请输入密码！");
+			form.password.focus();
+			return false;
+		}
+		return true;
+	}
+
+</script>
+
+
 <style type="text/css">
 	
 	
-	#a_1,#a_2{
-	color:blue;
-	font-size:3px;
-	}
+	
 	#btn{
 		width:200px;
 		height:40px;
@@ -23,11 +42,17 @@
 		valign:middle;
 		font-weight: bold;
 	}
+	.login_a{
+		text-decoration: none;
+		color:blue;
+	    font-size:3px;
+	}
 	
 </style>
+
 </head>
 <body>
-
+<form name="loginform" action="login" method="post" onsubmit="return isValidate(loginform)">
 	<table width="330px" height="300px" >
 		<tr>
 			<td colspan="2"></td>
@@ -43,23 +68,23 @@
 		<tr>
 			<td colspan="2" align="center">
 				<!-- <input type="submit" value="登录" id="btn"> -->
-				<input type="button" value="登录" id="btn">
+				<input type="submit" value="登录" id="btn">
 			</td>
 			
 		</tr>
 		
 		<tr>
-			<td align="left" id="a_1">
-			忘记密码
+			<td align="left" >
+			<a href="register.jsp" title="点击找回密码" class="login_a">忘记密码</a>
 			</td>
-			<td align="right" id="a_2">
-			立即注册
+			<td align="right" >
+			<a href="register.jsp" title="点击注册" class="login_a">立即注册</a>
 			</td>
 		</tr>
 		
 	
 	</table>
 
-
+</form>
 </body>
 </html>

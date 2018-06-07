@@ -7,15 +7,73 @@
     <welcome-file>home.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-  	<servlet-name>addUserServlet</servlet-name>
-  	<servlet-class>com.tourism_bbs.servlet.AddUserServlet</servlet-class>
- <init-param>
-   <param-name>charset</param-name>
-   <param-value>utf-8</param-value>
- </init-param>
+    <servlet-name>addUserServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.AddUserServlet</servlet-class>
+    <init-param>
+      <param-name>charset</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>addUserServlet</servlet-name>
-  	<url-pattern>/addUser</url-pattern>
+    <servlet-name>addUserServlet</servlet-name>
+    <url-pattern>/addUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>addTest</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.AddTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addTest</servlet-name>
+    <url-pattern>/add</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>postingServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.AddPostServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>postingServlet</servlet-name>
+    <url-pattern>/posting</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>updateUserServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.UpdatePersonalInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateUserServlet</servlet-name>
+    <url-pattern>/updateUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>showPersonalInfoServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowPersonalInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showPersonalInfoServlet</servlet-name>
+    <url-pattern>/showPersonalInfo</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>showPasswordServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowPasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showPasswordServlet</servlet-name>
+    <url-pattern>/showPassword</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>changePasswordServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ChangePasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>changePasswordServlet</servlet-name>
+    <url-pattern>/changePassword</url-pattern>
   </servlet-mapping>
 </web-app>
