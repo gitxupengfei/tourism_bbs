@@ -28,7 +28,7 @@ public class DBBean {
 	public Connection getConnection() {
 		//连接数据库的url
 
-		String url="jdbc:mysql://localhost:3306/bbs?useUnicode=true&characterEncoding=utf-8";
+		String url="jdbc:mysql://localhost:3306/bbs?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 		String dbuser="root";
 		String dbpass="123456";
 	   

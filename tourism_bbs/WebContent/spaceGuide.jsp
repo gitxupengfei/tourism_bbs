@@ -79,11 +79,11 @@
 <tr height="20px" ><td></td></tr>
 <tr height="30px" bgcolor="#0066FF"><td><a href="http://localhost:8080/tourism_bbs/showPassword" target="spaceRight" class="space_a">密码修改</a></td></tr>
 <tr height="20px" ><td></td></tr>
-<tr height="30px" bgcolor="#0066FF"><td>我的发帖</td></tr>
+<tr height="30px" bgcolor="#0066FF"><td><a href="http://localhost:8080/tourism_bbs/showMyPost" target="spaceRight" class="space_a">我的发帖</a></td></tr>
 <tr height="20px" ><td></td></tr>
 <tr height="30px" bgcolor="#0066FF"><td><a href="spacePosting.jsp" target="spaceRight" class="space_a">我要发帖</a></td></tr>
 <tr height="20px" ><td></td></tr>
-<tr height="30px" bgcolor="#0066FF"><td>我的收藏</td></tr>
+<tr height="30px" bgcolor="#0066FF"><td><a  target="spaceRight" class="space_a">我的收藏</a></td></tr>
 <tr height="20px" ><td></td></tr>
 <tr height="30px" bgcolor="#0066FF"><td>我的关注</td></tr>
 <tr height="20px" ><td></td></tr>

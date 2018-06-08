@@ -35,7 +35,7 @@
 		 answer1=form.answer1.value;
 		 question2=form.question2.value;
 		 answer2=form.answer2.value;
-	     var loginPassword="<%=session.getAttribute("password")%>"
+	     var loginPassword="<%=session.getAttribute("password")%>";
 		 
 		 var  difpassword= document.getElementById("difpassword").innerText;
 		

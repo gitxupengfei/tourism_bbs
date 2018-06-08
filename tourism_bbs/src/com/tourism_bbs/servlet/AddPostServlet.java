@@ -134,7 +134,7 @@ public class AddPostServlet extends HttpServlet {
 			
 			post.addPost();
 			info="发布成功！可前往我的发帖查看！";
-			forward="myPost.jsp";
+			forward="spacePostingSuccess.jsp";
 			
 		
 	} catch (Exception e) {

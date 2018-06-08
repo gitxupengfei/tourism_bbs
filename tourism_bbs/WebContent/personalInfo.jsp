@@ -100,7 +100,8 @@
 		 introduce=form.introduce.value;
 		 var  errorphone= document.getElementById("errorphone").innerText;
 		 var  errorQQ= document.getElementById("errorQQ").innerText;
-		 var file=document.getElementById("file").value;
+		 var file=document.getElementById("addphoto").value;
+		 alert(file);
 		 if(userName.trim()==""){
 			 alert("用户名不能为空！");
 			 form.register_username.focus();
@@ -262,7 +263,7 @@
 			<br>
 			</td>
 			
-				<td rowspan="3" ><img alt="addphoto" src="userphoto/${personalInfo.photo}" title="点击上传个性头像" id="addphoto" >
+				<td rowspan="3" ><img alt="addphoto" src="userphoto/${personalInfo.photo}" title="点击上传个性头像" id="addphoto"  >
 			<input type="file" accept="image/*" id="file" name="photoUpload"  style="display: none;">
 			
 			</td>

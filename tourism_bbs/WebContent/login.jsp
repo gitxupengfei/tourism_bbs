@@ -75,7 +75,7 @@
 		
 		<tr>
 			<td align="left" >
-			<a href="register.jsp" title="点击找回密码" class="login_a">忘记密码</a>
+			<a href="findPasswordOne.jsp" title="点击找回密码" class="login_a">忘记密码</a>
 			</td>
 			<td align="right" >
 			<a href="register.jsp" title="点击注册" class="login_a">立即注册</a>

@@ -146,6 +146,8 @@ public class UpdatePersonalInfoServlet extends HttpServlet {
 			
 			int result=userBean.update();
 			System.out.println(result);
+			RequestDispatcher rd=request.getRequestDispatcher("personalInfoChangeSuccess.jsp");
+			rd.forward(request, response);
 			
 		
 	} catch (Exception e) {

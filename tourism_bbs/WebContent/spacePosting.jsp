@@ -115,13 +115,13 @@
 			<td class="font">出行方式：</td>
 			<td>
 				<select name="style" id="select">
-				<option value="any" selected="selected">任何方式</option>
-				<option value="foot">步行</option>
-				<option value="bike">自行车</option>
-				<option value="bus">汽车</option>
-				<option value="train">火车</option>
-				<option value="plane">飞机</option>
-				<option value="boat">轮船</option>
+				<option value="任何方式" selected="selected">任何方式</option>
+				<option value="步行">步行</option>
+				<option value="自行车">自行车</option>
+				<option value="汽车">汽车</option>
+				<option value="火车">火车</option>
+				<option value="飞机">飞机</option>
+				<option value="轮船">轮船</option>
 	
 			</select>
 			</td>

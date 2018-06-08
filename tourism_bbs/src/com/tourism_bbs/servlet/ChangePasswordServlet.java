@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.tourism_bbs.bean.UserBean;
 
@@ -22,7 +23,7 @@ public class ChangePasswordServlet extends HttpServlet {
 		String answer1=new String(request.getParameter("answer1").getBytes("iso-8859-1"),"utf-8");
 		String question2=new String(request.getParameter("question2").getBytes("iso-8859-1"),"utf-8");
 		String answer2=new String(request.getParameter("answer2").getBytes("iso-8859-1"),"utf-8");;
-		
+		System.out.println(question1);
 		String info;
 		UserBean userBean=new UserBean();
 		userBean.setPasswrd(password);
@@ -33,6 +34,8 @@ public class ChangePasswordServlet extends HttpServlet {
 		try {
 			int result= userBean.changePassword();
 			System.out.println(result);
+			HttpSession session=request.getSession();
+			session.setAttribute("password", password);
 			RequestDispatcher rd=request.getRequestDispatcher("passwordChangeOK.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {

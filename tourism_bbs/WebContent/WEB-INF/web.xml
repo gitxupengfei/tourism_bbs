@@ -58,8 +58,7 @@
     <servlet-name>showPersonalInfoServlet</servlet-name>
     <url-pattern>/showPersonalInfo</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>showPasswordServlet</servlet-name>
     <servlet-class>com.tourism_bbs.servlet.ShowPasswordServlet</servlet-class>
   </servlet>
@@ -67,7 +66,6 @@
     <servlet-name>showPasswordServlet</servlet-name>
     <url-pattern>/showPassword</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>changePasswordServlet</servlet-name>
     <servlet-class>com.tourism_bbs.servlet.ChangePasswordServlet</servlet-class>
@@ -75,5 +73,45 @@
   <servlet-mapping>
     <servlet-name>changePasswordServlet</servlet-name>
     <url-pattern>/changePassword</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>findPasswordOneServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.FindPasswordOneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>findPasswordOneServlet</servlet-name>
+    <url-pattern>/findPasswordOne</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>findPasswordTwoServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.FindPasswordTwoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>findPasswordTwoServlet</servlet-name>
+    <url-pattern>/findPasswordTwo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>showMyPostServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowMyPostServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showMyPostServlet</servlet-name>
+    <url-pattern>/showMyPost</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>deleteMyPostServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.DeleteMyPostServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteMyPostServlet</servlet-name>
+    <url-pattern>/deleteMyPost</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>showMyPostDetailServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowMyPostDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showMyPostDetailServlet</servlet-name>
+    <url-pattern>/showMyPostDetail</url-pattern>
   </servlet-mapping>
 </web-app>

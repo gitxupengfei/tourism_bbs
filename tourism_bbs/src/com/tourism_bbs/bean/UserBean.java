@@ -384,6 +384,61 @@ public class UserBean {
 		return 0;
 	}
 	
+	/**
+	 *@Description£∫’“ªÿ√‹¬Î
+	 *@param userName
+	 *@param telephone
+	 *@return: UserBean
+	 *@Author:xupengfei
+	 */
+	public UserBean findPassword(String userName,String telephone){
+		Connection con=null;
+		ResultSet rs=null;
+		DBBean db=new DBBean();
+		String sql="select userName,password,question1,answer1,question2,answer2 from User_Table where userName='"
+		+userName+"' or telephone='"+telephone+"'";
+		try {
+			con=db.getConnection();
+			System.out.println(sql);
+			rs=db.executeQuery(sql);
+			if(rs.next()){
+				
+				String rsUserName=rs.getString(1);
+				String rsPassword=rs.getString(2);
+				String rsQuestion1=rs.getString(3);
+				String rsAnswer1=rs.getString(4);
+				String rsQuestion2=rs.getString(5);
+				String rsAnswer2=rs.getString(6);
+				
+				UserBean user=new UserBean();
+				
+				user.setUserName(rsUserName);
+				user.setPasswrd(rsPassword);
+				user.setQuestion1(rsQuestion1);
+				user.setAnswer1(rsAnswer1);
+				user.setQuestion2(rsQuestion2);
+				user.setAnswer2(rsAnswer2);
+				
+				return user;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				db.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return null;
+		
+	}
+	
 	public int getUserId() {
 	return userId;
    }
