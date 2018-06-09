@@ -24,6 +24,7 @@ $(document).ready(function(){
 });
 </script>
 <style type="text/css">
+
 	#order{
 		background-image: url("images/line.PNG");
 		height: 50px;
@@ -106,12 +107,10 @@ $(document).ready(function(){
 	}
 	#postdiv2{
 		width:700px;
-		height: 50px;
-		text-align:center;
-		
-		padding-left:10px;
+		padding-left:40px;
 		white-space:nowrap;
-		
+		height:20px;
+		margin-bottom:30px;
 		overflow:hidden;
 		text-overflow:ellipsis;
 	}
@@ -119,10 +118,11 @@ $(document).ready(function(){
 		font-size: large;
 		font-weight: bold;
 	}
-	#postbody{
+	#postContent{
 		
-	
+		
 	}
+	
 	#readmore{
 		
 		font-size: small;
@@ -194,40 +194,44 @@ $(document).ready(function(){
 			<input type="text" name="search_text" id="search_text">
 			<img alt="button" src="images/search.jpg" title="点击搜索" id="search_btn">
 </div>
+	
+	
+	
+	
+	
+	
+	<!-- PostList -->
+	<c:forEach var="post" items="${postList}">
 	<table id="content" >
 		<tr height="50px"  id="tabhead">
 			<td width="35%"  align="left">
-				<img alt="person_photo" src="images/menu.jpg" id="person_photo">
+				<img alt="person_photo" src="userphoto/${post.photo }" id="person_photo">
 				&nbsp;
-				<label id="author">name</label>
+				<label id="author">${post.userName}</label>
 				&nbsp;&nbsp;
 				<label id="grade">V1</label>
 			</td>
 			<td align="right" width="35%">
 				<img alt="like" src="images/collect.jpg" title="收藏人数" height="20px" width="20px">
-			    <label id="collectnum">101</label>
+			    <label id="collectnum">${post.postCollectionNum} </label>
 			    &nbsp;&nbsp;
 			    <img alt="comment" src="images/comment.jpg" title="评论的人数" height="20px" width="20px">
-			    <label id="commentnum">20</label>
+			    <label id="commentnum">${post.postCommentNum}</label>
 			    &nbsp;&nbsp;
 			    <img alt="time" src="images/time.jpg" title="发帖时间" height="20px" width="20px" >
-			    <label id="timenum">2018-01-01 9:20</label>
+			    <label id="timenum">${post.postTime}</label>
 			</td>
 			<td rowspan="4" >
-				<img alt="view" src="images/viewtest.jpg" title="大学生旅游" id="viewimg">
+				<img alt="view" src="picture/${post.picture}" title="大学生旅游" id="viewimg">
 			</td>
 		</tr>
 		<tr height="50px">
-			<td colspan="2" rowspan="2">
+			<td colspan="2" rowspan="2" id="postContent">
 			<div id="postdiv1">
-				<label id="posthead">醉美黄山之行！</label>
+				<label id="posthead">${post.title}</label>
 			</div>
 			<div id="postdiv2">
-				<label id="postbody">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;黄山：世界文化与自然双重遗产，世界地质公园，国家AAAAA级旅游景区，国家级风景名胜区，全国文明风景旅游区示范点，中华十大名山，天下第一奇山。
-黄山位于安徽省南部黄山市境内，有72峰，主峰莲花峰海拔1864米，与光明顶、天都峰并称三大黄山主峰，为36大峰之一。黄山是安徽旅游的标志，是中国十大风景名胜唯一的山岳风光。
-黄山原名“黟山”，因峰岩青黑，遥望苍黛而名。后因传说轩辕黄帝曾在此炼丹，故改名为“黄山”。黄山代表景观有“四绝三瀑”，四绝：奇松、怪石、云海、温泉；三瀑：人字瀑、百丈泉、九龙瀑。黄山迎客松是安徽人民热情友好的象征，承载着拥抱世界的东方礼仪文化。
-				</label>
+				${post.postContent }
 			</div>
 			</td>
 		</tr>
@@ -236,115 +240,14 @@ $(document).ready(function(){
 			<td ><div id="readmore"><a href="javascript:;" id="read_a" class="a2" title="点击查看详细内容">>>READ &nbsp;&nbsp;MORE</a></div></td>
 			<td>
 			<span id="zxj1">
-			<a href="javascript:;" id="style_a" class="a3"><label id="style_label" title="点击查看更多同方式帖子">自行车</label></a>
+			<a href="javascript:;" id="style_a" class="a3"><label id="style_label" title="点击查看更多同方式帖子">${post.styleLabel}</label></a>
 			</span>
 			<span id="zxj2">
-			<a href="javascript:;" id="place_a" class="a3"><label id="place_label" title="点击查看更多该景区帖子">黄山</label></a>
+			<a href="javascript:;" id="place_a" class="a3"><label id="place_label" title="点击查看更多该景区帖子">${post.placeLabel }</label></a>
 			</span>
 			</td>
 		</tr>
 	</table>
-	
-	<!-- 添加的table测试 -->
-	<table id="content" >
-		<tr height="50px"  id="tabhead">
-			<td width="35%"  align="left">
-				<img alt="person_photo" src="images/menu.jpg" id="person_photo">
-				&nbsp;
-				<label id="author">name</label>
-				&nbsp;&nbsp;
-				<label id="grade">V1</label>
-			</td>
-			<td align="right" width="35%">
-				<img alt="like" src="images/collect.jpg" title="收藏人数" height="20px" width="20px">
-			    <label id="collectnum">101</label>
-			    &nbsp;&nbsp;
-			    <img alt="comment" src="images/comment.jpg" title="评论的人数" height="20px" width="20px">
-			    <label id="commentnum">20</label>
-			    &nbsp;&nbsp;
-			    <img alt="time" src="images/time.jpg" title="发帖时间" height="20px" width="20px" >
-			    <label id="timenum">2018-01-01 9:20</label>
-			</td>
-			<td rowspan="4" >
-				<img alt="view" src="images/viewtest.jpg" title="大学生旅游" id="viewimg">
-			</td>
-		</tr>
-		<tr height="50px">
-			<td colspan="2" rowspan="2">
-			<div id="postdiv1">
-				<label id="posthead">醉美黄山之行！</label>
-			</div>
-			<div id="postdiv2">
-				<label id="postbody">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;黄山：世界文化与自然双重遗产，世界地质公园，国家AAAAA级旅游景区，国家级风景名胜区，全国文明风景旅游区示范点，中华十大名山，天下第一奇山。
-黄山位于安徽省南部黄山市境内，有72峰，主峰莲花峰海拔1864米，与光明顶、天都峰并称三大黄山主峰，为36大峰之一。黄山是安徽旅游的标志，是中国十大风景名胜唯一的山岳风光。
-黄山原名“黟山”，因峰岩青黑，遥望苍黛而名。后因传说轩辕黄帝曾在此炼丹，故改名为“黄山”。黄山代表景观有“四绝三瀑”，四绝：奇松、怪石、云海、温泉；三瀑：人字瀑、百丈泉、九龙瀑。黄山迎客松是安徽人民热情友好的象征，承载着拥抱世界的东方礼仪文化。
-				</label>
-			</div>
-			</td>
-		</tr>
-		<tr height="50px"></tr>
-		<tr >
-			<td ><div id="readmore"><a href="post.jsp" id="read_a" class="a2" title="点击查看详细内容">>>READ &nbsp;&nbsp;MORE</a></div></td>
-			<td>
-			<span id="zxj1">
-			<a href="javascript:;" id="style_a" class="a3"><label id="style_label" title="点击查看更多同方式帖子">自行车</label></a>
-			</span>
-			<span id="zxj2">
-			<a href="javascript:;" id="place_a" class="a3"><label id="place_label" title="点击查看更多该景区帖子">黄山</label></a>
-			</span>
-			</td>
-		</tr>
-	</table>
-<table id="content" >
-		<tr height="50px"  id="tabhead">
-			<td width="35%"  align="left">
-				<img alt="person_photo" src="images/menu.jpg" id="person_photo">
-				&nbsp;
-				<label id="author">name</label>
-				&nbsp;&nbsp;
-				<label id="grade">V1</label>
-			</td>
-			<td align="right" width="35%">
-				<img alt="like" src="images/collect.jpg" title="收藏人数" height="20px" width="20px">
-			    <label id="collectnum">101</label>
-			    &nbsp;&nbsp;
-			    <img alt="comment" src="images/comment.jpg" title="评论的人数" height="20px" width="20px">
-			    <label id="commentnum">20</label>
-			    &nbsp;&nbsp;
-			    <img alt="time" src="images/time.jpg" title="发帖时间" height="20px" width="20px" >
-			    <label id="timenum">2018-01-01 9:20</label>
-			</td>
-			<td rowspan="4" >
-				<img alt="view" src="images/viewtest.jpg" title="大学生旅游" id="viewimg">
-			</td>
-		</tr>
-		<tr height="50px">
-			<td colspan="2" rowspan="2">
-			<div id="postdiv1">
-				<label id="posthead">醉美黄山之行！</label>
-			</div>
-			<div id="postdiv2">
-				<label id="postbody">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;黄山：世界文化与自然双重遗产，世界地质公园，国家AAAAA级旅游景区，国家级风景名胜区，全国文明风景旅游区示范点，中华十大名山，天下第一奇山。
-黄山位于安徽省南部黄山市境内，有72峰，主峰莲花峰海拔1864米，与光明顶、天都峰并称三大黄山主峰，为36大峰之一。黄山是安徽旅游的标志，是中国十大风景名胜唯一的山岳风光。
-黄山原名“黟山”，因峰岩青黑，遥望苍黛而名。后因传说轩辕黄帝曾在此炼丹，故改名为“黄山”。黄山代表景观有“四绝三瀑”，四绝：奇松、怪石、云海、温泉；三瀑：人字瀑、百丈泉、九龙瀑。黄山迎客松是安徽人民热情友好的象征，承载着拥抱世界的东方礼仪文化。
-				</label>
-			</div>
-			</td>
-		</tr>
-		<tr height="50px"></tr>
-		<tr >
-			<td ><div id="readmore"><a href="post.jsp" id="read_a" class="a2" title="点击查看详细内容">>>READ &nbsp;&nbsp;MORE</a></div></td>
-			<td>
-			<span id="zxj1">
-			<a href="javascript:;" id="style_a" class="a3"><label id="style_label" title="点击查看更多同方式帖子">自行车</label></a>
-			</span>
-			<span id="zxj2">
-			<a href="javascript:;" id="place_a" class="a3"><label id="place_label" title="点击查看更多该景区帖子">黄山</label></a>
-			</span>
-			</td>
-		</tr>
-	</table>
+	</c:forEach>
 </body>
 </html>

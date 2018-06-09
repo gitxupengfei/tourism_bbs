@@ -101,7 +101,7 @@
 		 var  errorphone= document.getElementById("errorphone").innerText;
 		 var  errorQQ= document.getElementById("errorQQ").innerText;
 		 var file=document.getElementById("addphoto").value;
-		 alert(file);
+		 
 		 if(userName.trim()==""){
 			 alert("用户名不能为空！");
 			 form.register_username.focus();
@@ -135,7 +135,7 @@
 			 form.QQ.focus();
 			 return false;
 		 }
-		 if(file.trim()==""){
+		 if(file==""){
 			 alert("请上传个性图像！");
 			 form.photoUpload.focus();
 			 return false;

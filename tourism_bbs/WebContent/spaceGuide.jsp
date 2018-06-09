@@ -54,10 +54,10 @@
 </head>
 <body>
 <div id="personalPhotoDiv" align="center">
-	<img alt="用户头像" src="images/defaultphoto.jpg" id="personalPhoto">
+	<img alt="用户头像" src="userphoto/${user.photo}" id="personalPhoto">
 	<br>
 	<br>
-	<label id="userName">旅行侠</label>
+	<label id="userName">${user.userName }</label>
 	<br>
 	<br>
 	<table width="150px">
@@ -67,9 +67,9 @@
 	<td>积分</td>
 	</tr>
 	<tr class="sgtr">
-	<td id="gradetd"><label >V3</label></td>
-	<td><label>11</label></td>
-	<td><label>122</label></td>
+	<td id="gradetd"><label >V${user.level}</label></td>
+	<td><label>${user.attentionNum }</label></td>
+	<td><label>${user.experienceNum }</label></td>
 	</tr>
 	</table>
 </div>

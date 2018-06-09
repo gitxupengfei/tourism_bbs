@@ -38,6 +38,33 @@ public class UserBean {
 	private String photo;
 	private String photoPath;
 	private int status;
+	
+	/**
+	 * 用户经验值
+	 */
+	private int experienceNum;
+	
+	/**
+	 * 用户等级
+	 */
+	private int level;
+	
+	
+
+
+	/**
+	 * 用户的粉丝数量
+	 */
+	private int attentionNum;
+	
+	/**
+	 * 用户发表的文章总的收藏量
+	 */
+	private int collectionNum;
+
+
+
+
 /**
  * 
  *@Description：添加新用户
@@ -439,6 +466,50 @@ public class UserBean {
 		
 	}
 	
+	/**
+	 *@Description：获取用户的粉丝、经验、等级
+	 *@param userId
+	 *@return: UserBean
+	 *@Author:xupengfei
+	 */
+	public UserBean getUserLevel(String userId) throws Exception{
+		
+		Connection con=null;
+		ResultSet rs=null;
+		DBBean db=new DBBean();
+		String sql="select * from user_view where userId='"+userId+"'";
+		db.getConnection();
+		rs=db.executeQuery(sql);
+		if(rs.next()){
+			int userid=rs.getInt(1);
+			String userName=rs.getString(2);
+			String photo=rs.getString(3);
+			String introduce=rs.getString(4);
+			int attentionNum=rs.getInt(5);
+			int collectionNum=rs.getInt(6);
+			int experience=(attentionNum*10)+collectionNum;
+			int level=(experience/100)+1;
+			UserBean user=new UserBean();
+			user.setUserId(userid);
+			user.setUserName(userName);
+			user.setPhoto(photo);
+			user.setIntroduce(introduce);
+			user.setAttentionNum(attentionNum);
+			user.setExperienceNum(experience);
+			user.setLevel(level);
+			return user;
+			
+		}
+		db.close();
+		
+		
+		return null;
+		
+	} 
+	
+	
+	
+	
 	public int getUserId() {
 	return userId;
    }
@@ -551,8 +622,49 @@ public class UserBean {
 		return photoPath;
 	}
 	
+	public int getAttentionNum() {
+		return attentionNum;
+	}
 
 
+
+	public void setAttentionNum(int attentionNum) {
+		this.attentionNum = attentionNum;
+	}
+
+
+
+	public int getCollectionNum() {
+		return collectionNum;
+	}
+
+
+
+	public void setCollectionNum(int collectionNum) {
+		this.collectionNum = collectionNum;
+	}
+
+	public int getExperienceNum() {
+		return experienceNum;
+	}
+
+
+
+	public void setExperienceNum(int experienceNum) {
+		this.experienceNum = experienceNum;
+	}
+
+
+
+	public int getLevel() {
+		return level;
+	}
+
+
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
 
 
 

@@ -1,0 +1,32 @@
+.pagination{
+	border: 1px;
+    margin: 0px auto;
+    margin-bottom:0px;
+}
+
+.pagination > a, .pagination > strong, .pagination > input{
+    font-family:"微软雅黑";
+	border: solid thin #ddd;
+	margin: 5px;
+	text-decoration: none;
+    text-align: center;
+	vertical-align: middle;
+	padding:  5px 10px;
+	display: inline-table;
+	color: black;
+	font-weight: 100;
+}
+
+.pagination > strong{
+	background-color:#DDDDDD; 	
+	cursor:not-allowed;
+}
+
+.pagination > a{
+	cursor: pointer;
+}
+
+.pagination > a:hover{
+	background-color:#0099FF;
+	color:white;
+}

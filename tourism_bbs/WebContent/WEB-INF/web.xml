@@ -114,4 +114,21 @@
     <servlet-name>showMyPostDetailServlet</servlet-name>
     <url-pattern>/showMyPostDetail</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>showSpaceGuideServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowSpaceGuideServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showSpaceGuideServlet</servlet-name>
+    <url-pattern>/showSpaceGuide</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>showPostListServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowPostListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showPostListServlet</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
 </web-app>

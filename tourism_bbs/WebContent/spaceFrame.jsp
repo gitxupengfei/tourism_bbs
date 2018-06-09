@@ -10,7 +10,7 @@
 <frameset rows="170px,*"  border="0px" >
 <frame src="personal_head.jsp" noresize="noresize">
 <frameset cols="18%,*" border="6px" bordercolor="#0066FF">
-<frame src="spaceGuide.jsp" noresize="noresize" >
+<frame src="http://localhost:8080/tourism_bbs/showSpaceGuide" noresize="noresize" name="spaceLeft" >
 <frame src="http://localhost:8080/tourism_bbs/showPersonalInfo" noresize="noresize" name="spaceRight">
 </frameset>
 	

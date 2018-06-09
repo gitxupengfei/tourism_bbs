@@ -5,6 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>大学生旅游论坛</title>
+<script src="jquery-3.3.1.js"></script>
+<script type="text/javascript">
+
+</script>
 <style type="text/css">
 	iframe{
 	    height:100%;

@@ -56,6 +56,7 @@ body{
         top:0px;
         right:0px;
         background-image: url("images/menu.jpg");
+        cursor: pointer;
   }
   
   #head{
