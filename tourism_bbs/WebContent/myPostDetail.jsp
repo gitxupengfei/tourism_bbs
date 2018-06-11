@@ -5,9 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
+<script src="jquery-3.3.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	  if(window.parent != window){
+	    parent.document.getElementById("iframe").style.height = (document.body.scrollHeight+30)+"px";
+	  }
+	 });
+</script>
 <style type="text/css">
 	body{
-		overflow: ;
+		
 	}
 	table{
 		width: 700px;

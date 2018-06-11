@@ -9,6 +9,27 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){	
+		//用户名校验
+		$("#register_username").blur(function () {
+			var userName=$("#register_username").val();
+			
+			$.ajax({
+    			type: "get",
+    			url: "checkUserName;charset=UTF-8 ",
+    			data: {userName: userName},
+    			success: function(html_data){
+    				
+    				if(html_data=="Error"){
+    					$("#errorUserName").text("×该用户名已注册！请更换！");
+    					
+    				}
+    				else
+    					$("#errorUserName").text("");
+    			}
+    		}); 
+			
+		});
+		
 		$("#confirm_password").blur(function() {
 			var login_password=$("#login_password").val();
 			var confirm_password=$("#confirm_password").val();
@@ -121,6 +142,7 @@
 		 var  difpassword= document.getElementById("difpassword").innerText;
 		 var  errorphone= document.getElementById("errorphone").innerText;
 		 var  errorQQ= document.getElementById("errorQQ").innerText;
+		 var errorUserName=document.getElementById("errorUserName").innerText;
 		 var file=document.getElementById("file").value;
 		 if(userName.trim()==""){
 			 alert("用户名不能为空！");
@@ -171,6 +193,11 @@
 		 if(introduce.trim()==""){
 			 alert("自我介绍不能为空！");
 			 form.introduce.focus();
+			 return false;
+		 }
+		 if(errorUserName.trim()!=""){
+			 alert("该用户名已注册，请更换用户名！");
+			 form.register_username.focus();
 			 return false;
 		 }
 		 if(difpassword.trim()!=""){
@@ -234,7 +261,7 @@
 	
 	}
 	
-	#difpassword,#errorphone,#errorQQ{
+	#difpassword,#errorphone,#errorQQ,#errorUserName{
 		font-size: small;
 		color:red;
 		
@@ -261,10 +288,10 @@
 	<table id="register_table">
 		<tr>
 			<td class="word">用户名：</td>
-			<td><input type="text" name="register_username" class="in">
+			<td><input type="text" name="register_username" class="in" id="register_username">
 			<br>
 			</td>
-			<td></td>
+			<td><label id="errorUserName"></label></td>
 			
 		</tr>
 		<tr>

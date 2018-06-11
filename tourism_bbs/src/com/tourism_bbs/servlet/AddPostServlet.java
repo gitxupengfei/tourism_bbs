@@ -115,10 +115,10 @@ public class AddPostServlet extends HttpServlet {
 		String styleLabel=(String)request.getAttribute("style");
 		String placeLabel=(String)request.getAttribute("place");
 		String postHTML=(String)request.getAttribute("postContent");
-		System.out.println("--<br/>"+postHTML+"<br/>--");
+		
 		String postContent=postHTML.replaceAll(" ","&nbsp;&nbsp;").replaceAll("\r","<br/>");  
 		request.setAttribute("postContent", postContent);
-		System.out.println(postContent);
+		
 		PostBean post=new PostBean();
 		//´«ÖµÖÁPostBean
 		post.setPostUserId(postUserId);

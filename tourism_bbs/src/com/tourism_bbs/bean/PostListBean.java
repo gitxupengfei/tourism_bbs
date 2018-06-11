@@ -19,7 +19,15 @@ public class PostListBean {
 	private String photo;
 	private int attentionNum;
 	private int collectionNum;
+	private int level;
 	
+	
+
+
+
+
+
+
 	/**
 	 *@Description：根据不同的选择，获取显示在首页的帖子列表
 	 *@param sql
@@ -68,6 +76,7 @@ public class PostListBean {
 			 String photo=rs.getString(12);
 			 int attentionNum=rs.getInt(13);
 			 int collectionNum=rs.getInt(14);
+			 int level=((attentionNum*10)+collectionNum)/100+1;
 			 PostListBean post=new PostListBean();
 			 post.setPostId(postId);
 			 post.setPostUserId(postUserId);
@@ -83,6 +92,7 @@ public class PostListBean {
 			 post.setPhoto(photo);
 			 post.setAttentionNum(attentionNum);
 			 post.setCollectionNum(collectionNum);
+			 post.setLevel(level);
 			 postlist.add(post);
 			
 			 
@@ -98,9 +108,42 @@ public class PostListBean {
 	}
 	
 	
+	/**
+	 *@Description：获取不同查询时的结果总数。
+	 *@param sql
+	 *@return: int
+	 * @throws Exception 
+	 *@Author:xupengfei
+	 */
+	public int getPageCount(String sql) throws Exception{
+		Connection con=null;
+		DBBean dbBean=new DBBean();
+		ResultSet rs;
+		con=dbBean.getConnection();
+		rs=dbBean.executeQuery(sql);
+		int num=0;
+		while(rs.next()){
+			num++;
+			
+		}
+		dbBean.close();
+		return num;
+		
+	}
 	
-	
-	
+	public int getLevel() {
+		return level;
+	}
+
+
+
+
+
+
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	
 	
 	public int getPostId() {

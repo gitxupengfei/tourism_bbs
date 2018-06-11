@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.tourism_bbs.bean.PostListBean;
 
@@ -19,23 +20,36 @@ public class ShowPostListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pageNo=1;
-		System.out.println("AAA");
-		//获取从页面中传递的第几页信息To do:
+		String forward;
+		request.setAttribute("currentPage", pageNo);
+		
 		PostListBean postListBean=new PostListBean();
 		ArrayList<PostListBean> postList=new ArrayList<PostListBean>();
-		String sql="select * from post_user_view";
+		String sql="select * from post_user_view order by postId desc";
 		try {
 			
 			postList=postListBean.getPostList(sql, String.valueOf(pageNo));
+			int pageCount=postListBean.getPageCount(sql);
+			request.setAttribute("pageCount",pageCount);
 			request.setAttribute("postList", postList);
-			System.out.println(postList);
+			
 			
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RequestDispatcher rd=request.getRequestDispatcher("home.jsp");
+		HttpSession session=request.getSession();
+		Object userid=session.getAttribute("userid");
+		
+		
+		//判断用户是否登录
+		if (userid==null ){
+			
+			forward="home.jsp";
+		}
+		else forward="personalhome.jsp";
+		RequestDispatcher rd=request.getRequestDispatcher(forward);
 		rd.forward(request, response);
 		
 		

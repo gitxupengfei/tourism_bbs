@@ -34,7 +34,7 @@ $(document).ready(function(){
 	 });
 	//返回主页
 	 $("#a_home").click(function(){
-		 window.location.href='home.jsp';
+		 window.location.href='home';
 	 });
 	 
 	});

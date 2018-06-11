@@ -89,7 +89,7 @@ public class PostBean {
 		int index=1;
 		DBBean db=new DBBean();
 		ArrayList posts=new ArrayList();
-		String sql="select postId,title,postTime  from Post_Table where postUserId='"+userId+"'";
+		String sql="select postId,title,postTime  from Post_Table where postUserId='"+userId+"' order by postId desc";
 		
 		try {
 			con=db.getConnection();

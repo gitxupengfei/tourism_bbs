@@ -8,36 +8,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.tourism_bbs.bean.UserBean;
 
 
-public class ShowSpaceGuideServlet extends HttpServlet {
+public class IframeToFrame extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserBean userBean=new UserBean();
-		HttpSession session=request.getSession();
-	String userid=String.valueOf(session.getAttribute("userid"));
-	
-
-	
-
-	
-		try {
-			UserBean user=userBean.getUserLevel(userid);
-			request.setAttribute("user", user);
-			RequestDispatcher rd=request.getRequestDispatcher("spaceGuide.jsp");
-			rd.forward(request, response);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String postId=request.getParameter("postId");
+		request.setAttribute("postId", postId);
+		System.out.println(postId);
+		String postUserId=request.getParameter("postUserId");
+		request.setAttribute("postUserId", postUserId);
+		RequestDispatcher rd=request.getRequestDispatcher("postUserSpaceFrame.jsp");
+		rd.forward(request, response);
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

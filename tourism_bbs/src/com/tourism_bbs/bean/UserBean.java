@@ -132,10 +132,10 @@ public class UserBean {
 		sql.append(photoPath);
 		sql.append("')");
 		
-		System.out.println(sql.toString());
+		
 		try {
 			con=db.getConnection();
-			System.out.println(con);
+			
 			rs=db.executeQuery("select * from User_Table where userName='"+userName+"'");
 			if(!rs.next()){
 				db.executeUpdate(sql.toString());
@@ -185,10 +185,13 @@ public class UserBean {
 					UserBean userBean=new UserBean();
 					userBean.setUserId(rsuserId);
 					userBean.setUserName(rsusername);
+					
 					userBean.setPasswrd(rspassword);
 					userBean.setPhotoPath(rsphoto);
 					userBean.setStatus(rsstatus);
+				
 					return userBean;
+					
 				}
 			}
 		} catch (Exception e) {
@@ -226,7 +229,7 @@ public class UserBean {
 		boolean find=false ;
 		Connection con=null;
 		ResultSet rs=null;
-		String sql="select * from User_Table where userName='"+userName+"'";
+		String sql="select * from User_Table where userName='"+name+"'";
 		try {
 			con=dbBean.getConnection();
 			rs=dbBean.executeQuery(sql);

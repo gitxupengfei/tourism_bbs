@@ -20,8 +20,10 @@ public class ShowPersonalInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session=request.getSession();
+		
 		String userid=String.valueOf(session.getAttribute("userid"));
 		
+	
 		UserBean userdb=new UserBean();
 		UserBean personalInfo=userdb.findUserById(userid);
 		request.setAttribute("personalInfo", personalInfo);

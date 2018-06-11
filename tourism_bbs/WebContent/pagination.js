@@ -118,7 +118,7 @@ Pagination.prototype.refresh = function(){
 	var page_data = this.calculate_args();
 
 	this.container.innerHTML = "一共" + this.total + "条记录 " + this.total_page + "页";
-
+	console.log(this.container.innerHTML);
 	// 显示首页
 	if(this.display_home){
 		this.create_button(1, this.current_page !== 1, this.home_page_name);
@@ -141,7 +141,7 @@ Pagination.prototype.refresh = function(){
 	if(page_data['end'] !== this.total_page){
 		this.create_button(undefined, false, this.omit_name);
 	}
-
+	
 	// 下一页
 	this.create_button(page_data['next'], this.current_page !== this.total_page, this.next_page_name);
 

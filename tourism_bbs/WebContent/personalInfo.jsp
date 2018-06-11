@@ -12,6 +12,9 @@
 	$(document).ready(function(){	
 		
 		
+	
+		
+		
 		$("#phone").blur(function() {
 			var regexphone="^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$";
 			var phone=$("#phone").val();
@@ -90,6 +93,28 @@
 		 });
 	
 	});
+	//用户名校验
+	function checkUserName(){
+		var userName=$("#register_username").val();
+		var name='<%=(String)session.getAttribute("username")%>';
+		if(name==userName){
+			userName="不可能重复的名字";
+		}
+		$.ajax({
+			type: "get",
+			url: "checkUserName;charset=UTF-8 ",
+			data: {userName: userName},
+			success: function(html_data){
+				
+				if(html_data=="Error"){
+					$("#errorUserName").text("×该用户名已注册！请更换！");
+					
+				}
+				else
+					$("#errorUserName").text("");
+			}
+		}); 
+	}
 	
 	function isUpdateValidate(form){
 		 document.charset="utf-8";
@@ -101,7 +126,7 @@
 		 var  errorphone= document.getElementById("errorphone").innerText;
 		 var  errorQQ= document.getElementById("errorQQ").innerText;
 		 var file=document.getElementById("addphoto").value;
-		 
+		 var errorUserName=document.getElementById("errorUserName").innerText;
 		 if(userName.trim()==""){
 			 alert("用户名不能为空！");
 			 form.register_username.focus();
@@ -124,7 +149,11 @@
 			 form.introduce.focus();
 			 return false;
 		 }
-		
+		 if(errorUserName.trim()!=""){
+			 alert("该用户名已经注册,请更换用户名");
+			 form.register_username.focus();
+			 return false;
+		 }
 		 if(errorphone.trim()!=""){
 			 alert("请输入正确的手机号码！");
 			 form.phone.focus();
@@ -180,7 +209,7 @@
 	
 	}
 	
-	#difpassword,#errorphone,#errorQQ{
+	#difpassword,#errorphone,#errorQQ,#errorUserName{
 		font-size: small;
 		color:red;
 		
@@ -202,10 +231,10 @@
 	<table id="register_table">
 		<tr>
 			<td class="word">用户名：</td>
-			<td><input type="text" name="register_username" class="in" value="${personalInfo.userName}">
+			<td><input type="text" name="register_username" class="in" value="${personalInfo.userName}" id="register_username" onblur="checkUserName()">
 			<br>
 			</td>
-			<td></td>
+			<td><label id="errorUserName"></label></td>
 			
 		</tr>
 		

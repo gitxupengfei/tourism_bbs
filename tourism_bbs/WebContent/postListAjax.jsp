@@ -5,18 +5,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>大学生旅游论坛</title>
+<title></title>
 <link href="pagination.css" rel="stylesheet">
 <script src="pagination.js"></script>
 <script src="jquery-3.3.1.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-	//READ MORE跳转！
-	
-	
-});
+function init(){
+		alert("${loginInfo}");
+}
+<c:if test="${!empty loginInfo}">
+	window.onload=init;
+</c:if>
+
+function readMore(){
+	alert("查看详细信息，请先登录！");
+}
+
+
 </script>
 <style type="text/css">
+
 	#order{
 		background-image: url("images/line.PNG");
 		height: 50px;
@@ -131,7 +139,7 @@ $(document).ready(function(){
   		  color:orange;
   }
   a.a2:visited{
-		  color:red;
+		  color:gray;
   }
   
   a.a3:link{
@@ -142,19 +150,16 @@ $(document).ready(function(){
   		  color:orange;
   }
   
-  
 	#zxj1{
 		font-size: small;
 		text-decoration: none;
 		margin-left: 20px;
-		 color:#0066FF;
 		
 	}
 	#zxj2{
 		font-size: small;
 		text-decoration: none;
 		margin-left:150px;
-		 color:#0066FF;
 	}
 	
 	#page{
@@ -164,43 +169,11 @@ $(document).ready(function(){
 	}
 	
 	
+	
 </style>
 </head>
 <body>
-	<div>
-	<jsp:include page="personal_head.jsp"></jsp:include>
-    </div>
-	<div id="order" >
-	
-	<span id="select_span">
-	排序方式：<select name="order" class="select">
-				<option value="no" selected="selected">无排序</option>
-				<option value="hot">热度</option>
-				<option value="great">好评</option>
-				<option value="famous">名家</option>
-		</select>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	出行方式：<select name="style" class="select">
-				<option value="any" selected="selected">任何方式</option>
-				<option value="foot">步行</option>
-				<option value="bike">自行车</option>
-				<option value="bus">汽车</option>
-				<option value="train">火车</option>
-				<option value="plane">飞机</option>
-				<option value="boat">轮船</option>
-	
-			</select>
-</span>
-			<input type="text" name="search_text" id="search_text">
-			<img alt="button" src="images/search.jpg" title="点击搜索" id="search_btn">
-</div>
-	
-	
-	
-	
-	
-	<div id="postListDiv">
-	<!-- PostList -->
+<div id="postListDiv">
 	<c:forEach var="post" items="${postList}">
 	<table id="content" >
 		<tr height="50px"  id="tabhead">
@@ -238,13 +211,13 @@ $(document).ready(function(){
 		</tr>
 		<tr height="50px"></tr>
 		<tr >
-			<td ><div id="readmore"><a href="showPostDetail?postId=${post.postId }&postUserId=${post.postUserId}" id="read_a" class="a2" title="点击查看详细内容">>>READ &nbsp;&nbsp;MORE</a></div></td>
+			<td ><div id="readmore" onclick="readMore()"><a href="javascript:;" id="read_a" class="a2" title="点击查看详细内容">>>READ &nbsp;&nbsp;MORE</a></div></td>
 			<td>
 			<span id="zxj1">
-			<label id="style_label" >${post.styleLabel}</label>
+			<a href="javascript:;" id="style_a" class="a3"><label id="style_label" title="点击查看更多同方式帖子">${post.styleLabel}</label></a>
 			</span>
 			<span id="zxj2">
-			<label id="place_label">${post.placeLabel }</label>
+			<a href="javascript:;" id="place_a" class="a3"><label id="place_label" title="点击查看更多该景区帖子">${post.placeLabel }</label></a>
 			</span>
 			</td>
 		</tr>
@@ -254,11 +227,12 @@ $(document).ready(function(){
 	<div id="page">
 	<div id="pagination" class="pagination"></div>
 	</div>
+	
 </body>
 <script type="text/javascript">
 var config = {
-		total: <%=(int)request.getAttribute("pageCount")%>, // 当前页面记录总条数
-		current_page:<%=(int)request.getAttribute("currentPage")%> , // 当前页码
+		total: '<%=request.getAttribute("pageCount")%>', // 当前页面记录总条数
+		current_page:'<%=request.getAttribute("currentPage")%>' , // 当前页码
 		page_size: 5 // 每页的记录数目
 	};
 	var pagination = new Pagination('pagination', config);
@@ -271,4 +245,5 @@ var config = {
 		});
 	};
 </script>
+
 </html>

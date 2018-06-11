@@ -40,7 +40,9 @@ public class AddUserServlet extends HttpServlet {
         DiskFileItemFactory factory = new DiskFileItemFactory();  
         //获取文件需要上传到的路径  
         String path = request.getRealPath("/userphoto");  
-          
+        String forward = null;
+		//页面的提示信息
+		String info = null; 
         //如果没以下两行设置的话，上传大的 文件 会占用 很多内存，  
         //设置暂时存放的 存储室 , 这个存储室，可以和 最终存储文件 的目录不同  
         /** 
@@ -101,7 +103,7 @@ public class AddUserServlet extends HttpServlet {
                     int length = 0 ;  
                     byte [] buf = new byte[1024] ;  
                       
-                    System.out.println("获取上传文件的总共的容量："+item.getSize());  
+                   
   
                     // in.read(buf) 每次读到的数据存放在   buf 数组中  
                     while( (length = in.read(buf) ) != -1)  
@@ -143,12 +145,11 @@ public class AddUserServlet extends HttpServlet {
 		String QQ=(String) request.getAttribute("QQ");
 		String introduce=(String) request.getAttribute("introduce");
 		String photoPath=(String) request.getAttribute("photo");
-		//用户未选择图像则选用默认图像代替。
-		if(photoPath==null){
-			photoPath="default.jpg";
-		}
+		
 		
 		UserBean userBean=new UserBean();
+		
+		
 		//属性赋值
 		
 		userBean.setUserName(userName);
@@ -166,9 +167,7 @@ public class AddUserServlet extends HttpServlet {
 		userBean.setIntroduce(introduce);
 		userBean.setPhotoPath(photoPath);
 		//跳转的页面
-		String forward = null;
-		//页面的提示信息
-		String info = null;
+		
 		
 		try {
 			

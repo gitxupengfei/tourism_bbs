@@ -24,8 +24,10 @@ $(document).ready(function(){
 	 });
 	//返回主页
 	 $("#a_personalhome").click(function(){
-		 window.top.location='personalhome.jsp';
+		 window.top.location='home';
 	 });
+	
+	
 	 
 	});
 	
@@ -100,7 +102,7 @@ body{
 	<p>
 	<a href="javascript:;" target="_top" class="a1" id="a_personalhome">主页</a>
 	<p>
-	<a href="javascript:if(confirm('您确定要退出当前用户吗?'))top.location='home.jsp'" target="top" class="a1" id="a_exit">注销</a>
+	<a href="javascript:if(confirm('您确定要退出当前用户吗?'))top.location='exitLogin'" target="top" class="a1" id="a_exit">注销</a>
 </div>
 </div>
 

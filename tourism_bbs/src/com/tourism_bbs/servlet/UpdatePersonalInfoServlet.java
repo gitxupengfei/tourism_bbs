@@ -130,6 +130,7 @@ public class UpdatePersonalInfoServlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		int userId=(int) session.getAttribute("userid");
 		
+		
 		UserBean userBean=new UserBean();
 		//属性赋值
 		userBean.setUserId(userId);
@@ -145,7 +146,9 @@ public class UpdatePersonalInfoServlet extends HttpServlet {
 		try {
 			
 			int result=userBean.update();
-			System.out.println(result);
+			//更改用户图片
+			session.setAttribute("photo", photoPath);
+			session.setAttribute("username", userName);
 			RequestDispatcher rd=request.getRequestDispatcher("personalInfoChangeSuccess.jsp");
 			rd.forward(request, response);
 			

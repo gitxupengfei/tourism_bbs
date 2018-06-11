@@ -13,22 +13,24 @@ import javax.servlet.http.HttpSession;
 import com.tourism_bbs.bean.UserBean;
 
 
-public class ShowSpaceGuideServlet extends HttpServlet {
+public class ShowPostUserSpaceGuideServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserBean userBean=new UserBean();
+		String forward;
+		String postUserId=request.getParameter("postUserId");
 		HttpSession session=request.getSession();
-	String userid=String.valueOf(session.getAttribute("userid"));
-	
-
-	
-
-	
+		String userid=String.valueOf(session.getAttribute("userid"));
+		if(postUserId.equals(userid)){
+			forward="spaceGuide.jsp";
+		}
+		else forward="postUserSpaceGuide.jsp";
 		try {
-			UserBean user=userBean.getUserLevel(userid);
+			UserBean user=userBean.getUserLevel(postUserId);
 			request.setAttribute("user", user);
-			RequestDispatcher rd=request.getRequestDispatcher("spaceGuide.jsp");
+			
+			RequestDispatcher rd=request.getRequestDispatcher(forward);
 			rd.forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

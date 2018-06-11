@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta  charset="UTF-8">
 <title>大学生旅游论坛</title>
+<link href="pagination.css" rel="stylesheet">
+<script src="pagination.js"></script>
 <script src="jquery-3.3.1.js"></script>
 <script type="text/javascript">
 function init(){
@@ -15,13 +17,11 @@ function init(){
 	window.onload=init;
 </c:if>
 
-$(document).ready(function(){
-	//READ MORE跳转！
-	
-	$("#read_a").click(function(){
-	 	window.location.href='post.jsp';
-	});
-});
+function readMore(){
+	alert("查看详细信息，请先登录！");
+}
+
+
 </script>
 <style type="text/css">
 
@@ -127,6 +127,7 @@ $(document).ready(function(){
 		
 		font-size: small;
 		
+		
 	}
 	
 	
@@ -154,12 +155,19 @@ $(document).ready(function(){
 		font-size: small;
 		text-decoration: none;
 		margin-left: 20px;
-		
+		 color:#0066FF;
 	}
 	#zxj2{
 		font-size: small;
 		text-decoration: none;
 		margin-left:150px;
+		 color:#0066FF;
+	}
+	
+	#page{
+		margin-top: 40px;
+		text-align: center;
+		margin-bottom: 40px;
 	}
 	
 	
@@ -199,7 +207,7 @@ $(document).ready(function(){
 	
 	
 	
-	
+	<div id="postListDiv">
 	<!-- PostList -->
 	<c:forEach var="post" items="${postList}">
 	<table id="content" >
@@ -209,7 +217,8 @@ $(document).ready(function(){
 				&nbsp;
 				<label id="author">${post.userName}</label>
 				&nbsp;&nbsp;
-				<label id="grade">V1</label>
+				
+				<label id="grade">V${post.level}</label>
 			</td>
 			<td align="right" width="35%">
 				<img alt="like" src="images/collect.jpg" title="收藏人数" height="20px" width="20px">
@@ -237,17 +246,39 @@ $(document).ready(function(){
 		</tr>
 		<tr height="50px"></tr>
 		<tr >
-			<td ><div id="readmore"><a href="javascript:;" id="read_a" class="a2" title="点击查看详细内容">>>READ &nbsp;&nbsp;MORE</a></div></td>
+			<td ><div id="readmore" onclick="readMore()"><a href="javascript:;" id="read_a" class="a2" title="点击查看详细内容">>>READ &nbsp;&nbsp;MORE</a></div></td>
+			
 			<td>
 			<span id="zxj1">
-			<a href="javascript:;" id="style_a" class="a3"><label id="style_label" title="点击查看更多同方式帖子">${post.styleLabel}</label></a>
+				<label id="style_label" >${post.styleLabel}</label>
 			</span>
 			<span id="zxj2">
-			<a href="javascript:;" id="place_a" class="a3"><label id="place_label" title="点击查看更多该景区帖子">${post.placeLabel }</label></a>
+			<label id="place_label" >${post.placeLabel }</label>
 			</span>
 			</td>
 		</tr>
 	</table>
 	</c:forEach>
+	
+	<div id="page">
+	<div id="pagination" class="pagination"></div>
+	</div>
+	</div>
 </body>
+<script type="text/javascript">
+var config = {
+		total: <%=(int)request.getAttribute("pageCount")%>, // 当前页面记录总条数
+		current_page:<%=(int)request.getAttribute("currentPage")%> , // 当前页码
+		page_size: 5 // 每页的记录数目
+	};
+	var pagination = new Pagination('pagination', config);
+	pagination.onchange = function(page){
+		
+		$("#postListDiv").load("changePostListByPage", {"pageNo":page}, function(data, statusTxt,xhr){
+			
+			    if(statusTxt=="error")
+			      alert("系统异常！请稍后再试");
+		});
+	};
+</script>
 </html>

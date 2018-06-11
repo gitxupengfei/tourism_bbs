@@ -4,15 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>大学生旅游论坛-空间</title>
+<title>大学生旅游论坛</title>
 </head>
 
 <frameset rows="170px,*"  border="0px" >
 <frame src="personal_head.jsp" noresize="noresize">
 <frameset cols="18%,*" border="6px" bordercolor="#0066FF">
-<frame src="http://localhost:8080/tourism_bbs/showSpaceGuide" noresize="noresize" name="spaceLeft" >
-<frame src="http://localhost:8080/tourism_bbs/showPersonalInfo" noresize="noresize" name="spaceRight" >
+<frame src="http://localhost:8080/tourism_bbs/showPostUserSpaceGuide?postUserId=${postUserId}" noresize="noresize" name="spaceLeft" >
+<frame src="http://localhost:8080/tourism_bbs/showCheckedPost?postId=${postId }" noresize="noresize" name="spaceRight" >
 </frameset>
 	
 </frameset> 
+
 </html>

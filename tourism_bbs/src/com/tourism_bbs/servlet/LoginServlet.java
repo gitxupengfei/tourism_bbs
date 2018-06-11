@@ -27,16 +27,18 @@ public class LoginServlet extends HttpServlet {
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
 		UserBean userBean=new UserBean();
+		
 		UserBean user=userBean.login(username, password);
 
 		if(user==null){
 		
 			info="用户名或密码输入错误！";
-			forward="home.jsp";
+			forward="home";
 		}
 		else{
 		HttpSession session=request.getSession();
 		session.setAttribute("userid",user.getUserId());
+		session.setAttribute("username", user.getUserName());
 		session.setAttribute("photo", user.getPhotoPath());
 		session.setAttribute("password", user.getPassword());
 		int status=user.getStatus();
@@ -49,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 			forward="home.jsp";
 		}
 		else{
-			forward="personalhome.jsp";
+			forward="home";
 		}
 		
 		}

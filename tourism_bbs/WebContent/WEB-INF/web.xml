@@ -4,7 +4,7 @@
   <welcome-file-list>
     <welcome-file>home.html</welcome-file>
     <welcome-file>home.htm</welcome-file>
-    <welcome-file>home.jsp</welcome-file>
+    <welcome-file>home</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>addUserServlet</servlet-name>
@@ -122,7 +122,6 @@
     <servlet-name>showSpaceGuideServlet</servlet-name>
     <url-pattern>/showSpaceGuide</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>showPostListServlet</servlet-name>
     <servlet-class>com.tourism_bbs.servlet.ShowPostListServlet</servlet-class>
@@ -130,5 +129,94 @@
   <servlet-mapping>
     <servlet-name>showPostListServlet</servlet-name>
     <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>changePostListByPageServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ChangePostListByPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>changePostListByPageServlet</servlet-name>
+    <url-pattern>/changePostListByPage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>exitLoginServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ExitLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>exitLoginServlet</servlet-name>
+    <url-pattern>/exitLogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>showPostDetailServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowPostDetail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showPostDetailServlet</servlet-name>
+    <url-pattern>/showPostDetail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>showPostUserSpaceGuideServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowPostUserSpaceGuideServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showPostUserSpaceGuideServlet</servlet-name>
+    <url-pattern>/showPostUserSpaceGuide</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>showCheckedPostServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowCheckedPostServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showCheckedPostServlet</servlet-name>
+    <url-pattern>/showCheckedPost</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>iframeServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.IframeToFrame</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>iframeServlet</servlet-name>
+    <url-pattern>/iframeToFrame</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>addLeaveWordsServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.AddLeaveWordsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addLeaveWordsServlet</servlet-name>
+    <url-pattern>/addLeaveWords</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>addAttentionServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.AddAttentionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addAttentionServlet</servlet-name>
+    <url-pattern>/addAttention</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>addCollectionServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.AddCollection</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addCollectionServlet</servlet-name>
+    <url-pattern>/addCollection</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>checkUserNameServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.CheckUserNameServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkUserNameServlet</servlet-name>
+    <url-pattern>/checkUserName</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>showMyCollectionServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowMyCollectionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showMyCollectionServlet</servlet-name>
+    <url-pattern>/showMyCollection</url-pattern>
   </servlet-mapping>
 </web-app>

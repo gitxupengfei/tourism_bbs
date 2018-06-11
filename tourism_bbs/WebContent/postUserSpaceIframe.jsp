@@ -26,7 +26,7 @@
 <!--保证页面只有一个滚动条  -->
 <body >
 <div style="height: 1500px;">
-<iframe src="spaceFrame.jsp" scrolling="auto"  id="iframe" >
+<iframe src="http://localhost:8080/tourism_bbs/iframeToFrame?postUserId=${postUserId }&postId=${postId}" scrolling="auto"  id="iframe" >
 </iframe>
 </div>
 </body>
