@@ -75,7 +75,7 @@ function readMore(){
 	#person_photo{
 		height: 40px;
 		width: 40px;
-		
+		border-radius:20px;
 		
 	
 		
@@ -286,7 +286,8 @@ function readMore(){
 var config = {
 		total: <%=(int)request.getAttribute("pageCount")%>, // 当前页面记录总条数
 		current_page:<%=(int)request.getAttribute("currentPage")%> , // 当前页码
-		page_size: 5 // 每页的记录数目
+		page_size: 5// 每页的记录数目
+		
 	};
 	var pagination = new Pagination('pagination', config);
 	pagination.onchange = function(page){

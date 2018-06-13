@@ -69,7 +69,7 @@ $(document).ready(function(){
 	#personalPhoto{
 		height: 50px;
 		width:50px;
-		
+		border-radius: 25px;
 	}
 	#userName{
 		font-weight: bold;

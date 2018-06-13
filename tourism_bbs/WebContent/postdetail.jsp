@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
+<link href="pagination.css" rel="stylesheet">
+<script src="pagination.js"></script>
 <script src="jquery-3.3.1.js"></script>
 <script type="text/javascript">
 		
@@ -13,6 +16,12 @@
 			var userId=<%=String.valueOf(session.getAttribute("userid"))%>;
 			if(postUserId==userId){
 				$("#collection_div").hide();
+			}
+			var comment='<%=request.getAttribute("commentList")%>';
+			
+			if(comment=='[]'){
+				$("#page").hide();
+				$("#commentShow").hide();
 			}
 		}
 
@@ -98,6 +107,56 @@
 		cursor: pointer;
 		
 	}
+	#page{
+		margin-top:10px;
+		text-align: center;
+		margin-left: 13%;
+		width: 630px;
+		background-color:#EEEED1; 
+		
+	}
+	#comment{
+		margin-left:13%;
+		margin-top: 50px;
+		
+	}
+	#commentShow{
+		margin-left: 13%;
+		background-color: #EEEED1;
+		width: 630px;
+		
+	}
+	#submitComment{
+		text-align: right;
+		width: 630px;
+	}
+	#submit_btn{
+		width: 60px;
+		height: 30px;
+		color: white;
+		background-color: #0066FF;
+		cursor: pointer;
+	}
+	#comHead{
+		
+	}
+	
+	#comText{
+		padding-left: 40px;
+		padding-top:10px;
+		color: grey;
+		padding-bottom: 10px;
+		border-bottom:1px dashed gray;
+	}
+	#comTime{
+		color:gray;
+		font-size: small;;
+	}
+	#comUserImg{
+		width: 20px;
+		height: 20px;
+		border-radius:10px;
+	}
 </style>
 </head>
 <body onload="init(${post.postUserId})">
@@ -123,5 +182,70 @@
 	<div id="collection_div">
 		<img alt="收藏" src="images/collection.jpg" title="点击收藏文章" id="collection_img" onclick="collection(${post.postId})">
 	</div>
+	<div id="comment">
+		<div id="inputComment">
+			<textarea rows="5" cols="95" id="commentContent"></textarea>
+		</div>
+		<div id="submitComment" >
+			<input type="button" value="评论"  id="submit_btn" onclick="submitComment(${post.postId})">
+		</div>
+	
+	</div>
+	
+		<div id="commentShow">
+		<c:forEach var="comment" items="${commentList}">
+			<div id="comHead">
+			<img alt="用户"  title="${comment.comUserName }" src="userphoto/${comment.comUserPhoto}" id="comUserImg">
+			&nbsp;&nbsp;<b>${comment.comUserName}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label id="comTime">${comment.comTime}</label>
+			</div>
+			<div id="comText">
+				${comment.comContent}
+			</div>
+			</c:forEach>
+		</div>
+		<div id="page">
+		<div id="pagination" class="pagination"></div>
+		</div>
+		
+	
 </body>
+<script type="text/javascript">
+//分页
+var config = {
+		total: <%=(int)request.getAttribute("pageCount")%>, // 当前页面记录总条数
+		current_page:<%=(int)request.getAttribute("currentPage")%> , // 当前页码
+		page_size: 3, // 每页的记录数目
+		display_home: false,
+		display_skip: false
+	};
+	var pagination = new Pagination('pagination', config);
+	pagination.onchange = function(page){
+		
+		$("#postListDiv").load("changePostListByPage", {"pageNo":page}, function(data, statusTxt,xhr){
+			
+			    if(statusTxt=="error")
+			      alert("系统异常！请稍后再试");
+		});
+	};
+	//评论
+	function submitComment(postId){
+		var userId='<%=String.valueOf(session.getAttribute("userid"))%>';
+		var commentContent=$("#commentContent").val();
+		if(commentContent.trim()!=""){
+		$.ajax({
+			type: "post",
+			url: "addLeaveWords",
+			data: {postId: postId, userId:userId,commentContent:commentContent},
+			success: function(html_data){
+				alert("评论成功！");
+				window.location.reload();
+			},
+			error: function(xhr,status,error){
+				alert("系统异常！请稍后再试！");
+			}
+		}); 
+		}
+		else alert("请输入评论内容！");
+	}
+</script>
 </html>

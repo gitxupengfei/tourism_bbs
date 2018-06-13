@@ -48,6 +48,7 @@ body{
         top:0px;
         right:0px;
       	 cursor:pointer;
+      	 border-radius:20px;
   }
   
   #head{

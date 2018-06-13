@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -510,7 +511,107 @@ public class UserBean {
 		
 	} 
 	
+	/**
+	 *@Description：展示所有用户的列表
+	 *@return: ArrayList<UserBean>
+	 *@Author:xupengfei
+	 */
+	public ArrayList<UserBean> showUserAdmin(String sql,int pageNo){
+		
+		
+		Connection con=null;
+		ResultSet rs=null;
+		//一页显示的记录数
+		int number=6;
+		int begin=(pageNo*number)-5;
+		int end=pageNo * number;
+		//循环计数器，默认为1
+		int index=1;
+		DBBean db=new DBBean();
+		ArrayList<UserBean> userList=new ArrayList<UserBean>();
+		
+		
+		try {
+			con=db.getConnection();
+			rs=db.executeQuery(sql);
+			while(rs.next()){
+				//在begin之前的记录不显示。
+				if(index<begin){
+					index++;
+					continue;
+				}
+				//在end之后的记录不显示
+				if(index>end)
+					break;
+				index++;
+				int UserId=rs.getInt(1);
+				String userName=rs.getString(2);
+				String telephone=rs.getString(3);
+				String QQ=rs.getString(4);
+				int attentionNum=rs.getInt(5);
+				int collectionNum=rs.getInt(6);
+				int level=((attentionNum*10)+collectionNum)/100+1;
+				int status=rs.getInt(7);
+				UserBean user=new UserBean();
+				user.setUserId(UserId);
+				user.setUserName(userName);
+				user.setTelephone(telephone);
+				user.setQQ(QQ);
+				user.setLevel(level);
+				user.setStatus(status);
+				userList.add(user);
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				db.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return userList;
+		
+
+		
+	}
 	
+	/**
+	 *@Description：获取用户总数（按照SQL语句）
+	 *@param sql
+	 *@return
+	 *@throws Exception: int
+	 *@Author:xupengfei
+	 */
+	public int getUserCount(String sql) {
+		Connection con=null;
+		DBBean dbBean=new DBBean();
+		ResultSet rs;
+		con=dbBean.getConnection();
+		int num=0;
+		try {
+			rs=dbBean.executeQuery(sql);
+		
+		
+		while(rs.next()){
+			num++;
+			
+		}
+		dbBean.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return num;
+		
+	}
 	
 	
 	public int getUserId() {

@@ -118,8 +118,14 @@ function init(){
 	</div>
 </body>
 <script type="text/javascript">
+
+	
+	
+	//取消关注
+
+
 	function deleteAtt(id){
-		var msg = "确定要删除该篇帖子吗？";  
+		var msg = "确定要取消关注吗？";  
         if (confirm(msg)==true){  
         	$.ajax({
     			type: "get",

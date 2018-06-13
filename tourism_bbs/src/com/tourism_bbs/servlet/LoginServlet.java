@@ -37,20 +37,22 @@ public class LoginServlet extends HttpServlet {
 		}
 		else{
 		HttpSession session=request.getSession();
-		session.setAttribute("userid",user.getUserId());
-		session.setAttribute("username", user.getUserName());
-		session.setAttribute("photo", user.getPhotoPath());
-		session.setAttribute("password", user.getPassword());
+		
 		int status=user.getStatus();
 	
 		if(status==5){
-			forward="admin.jsp";
+			session.setAttribute("adminId",user.getUserId());
+			forward="showUserAdmin";
 		}
 		else if(status==0){
 			info="¸ÃÕËºÅÒÑ±»½ûÖ¹µÇÂ½£¡";
-			forward="home.jsp";
+			forward="home";
 		}
 		else{
+			session.setAttribute("userid",user.getUserId());
+			session.setAttribute("username", user.getUserName());
+			session.setAttribute("photo", user.getPhotoPath());
+			session.setAttribute("password", user.getPassword());
 			forward="home";
 		}
 		

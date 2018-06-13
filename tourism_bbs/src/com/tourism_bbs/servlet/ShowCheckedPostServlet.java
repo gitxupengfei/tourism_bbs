@@ -1,6 +1,7 @@
 package com.tourism_bbs.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.tourism_bbs.bean.CommentBean;
 import com.tourism_bbs.bean.PostBean;
 
 
@@ -18,12 +20,16 @@ public class ShowCheckedPostServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String postId=request.getParameter("postId");
-		
-		
+		ArrayList commentList=new ArrayList();
+		CommentBean comment=new CommentBean();
 		PostBean postBean=new PostBean();
 		try {
 			PostBean post=new PostBean();
 			post=postBean.showMyPostDetail(postId);
+			commentList=comment.showComment(1, postId);
+			request.setAttribute("commentList", commentList);
+			request.setAttribute("currentPage", 1);
+			request.setAttribute("pageCount", comment.getCommentCount(postId));
 			request.setAttribute("post", post);
 			RequestDispatcher rd=request.getRequestDispatcher("postdetail.jsp");
 			rd.forward(request, response);

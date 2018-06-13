@@ -226,7 +226,6 @@
     <servlet-name>showPostListByConditionServlet</servlet-name>
     <url-pattern>/showPostListByCondition</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>showMyAttentionServlet</servlet-name>
     <servlet-class>com.tourism_bbs.servlet.ShowMyAttentionServlet</servlet-class>
@@ -234,5 +233,13 @@
   <servlet-mapping>
     <servlet-name>showMyAttentionServlet</servlet-name>
     <url-pattern>/showMyAttention</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>showUserAdminServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowUserAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showUserAdminServlet</servlet-name>
+    <url-pattern>/showUserAdmin</url-pattern>
   </servlet-mapping>
 </web-app>
