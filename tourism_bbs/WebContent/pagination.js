@@ -3,7 +3,7 @@
  * 分页类的构造函数
  * @method  Pagination
  * @author JunEnstein
- * @version 1.0
+ * @version 1.01
  * @param   {String}   element_id       HTML元素ID
  * @param   {Object}   custom_config    用户配置信息
  */
@@ -30,21 +30,23 @@ Pagination.prototype.default_config = {
 	total           : 0,				// 数据总的条目数
 	current_page    : 1,				// 当前所在的页码
 	page_size       : 10,				// 每一页数据所占的条目数
+	button_length   : 5,				// 默认最多同时显示的页码按钮只能为奇数, 如果为偶数默认+1
+	display_skip    : true,				// 是否显示跳转按钮
+	display_home    : true,				// 是否显示首页和尾页
 	home_page_name  : "首页",			// 首页按钮的名称
 	end_page_name   : "尾页",			// 尾页按钮的名称
 	prev_page_name  : "< 上一页",		// 上一页按钮的名称
 	next_page_name  : "下一页 >",		// 下一页按钮的名称
 	omit_name       : "...",			// 省略按钮的名称
-	skip_name       : "跳转",			// 跳转按钮
-	button_length   : 5, 				// 默认最多同时显示的页码按钮只能为奇数, 如果为偶数默认+1
-	display_skip    : true,   			// 是否显示跳转按钮
-	display_home    : true				// 是否显示首页和尾页
+	skip_name       : "跳转"				// 跳转按钮
 };
 
-/**
- * 初始化
- * @param custom_config
- */
+ /**
+  * 初始化用户配置
+  * @method initialize_config
+  * @author JunEnstein
+  * @param  {Object} custom_config 用户自定义参数
+  */
 Pagination.prototype.initialize_config = function(custom_config){
 	// 应用配置
 	for(var key in this.default_config){
@@ -54,12 +56,18 @@ Pagination.prototype.initialize_config = function(custom_config){
 			this[key] = this.default_config[key];
 		}
 	}
+	// 将字符串转化为int
+	this.total = parseInt(this.total);
+	this.current_page = parseInt(this.current_page);
+	this.page_size = parseInt(this.page_size);
+	this.button_length = parseInt(this.button_length);
+	// 将字符串的true和false调整为，boolen变量
+	this.display_skip = this.parseBoolean(this.display_skip);
+	this.display_home = this.parseBoolean(this.display_home);
 	// 如果要显示的按钮列表的长度为偶数,则将他变为奇数
 	if(this.button_length % 2 === 0) this.button_length++;
-
 	// 初始化页码总数
 	this.total_page = Math.ceil(this.total / this.page_size);
-	this.set_current_page(custom_config.current_page);
 };
 
 /**
@@ -69,7 +77,8 @@ Pagination.prototype.initialize_config = function(custom_config){
  * @param  {number} current_page 页码
  */
 Pagination.prototype.set_current_page = function(current_page){
-	this.current_page = current_page;
+	// 如果是不是int，先转化为int
+	this.current_page = parseInt(current_page);
 	if(this.current_page < 1) this.current_page = 1;
     if(this.current_page > this.total_page) this.current_page = this.total_page;
 };
@@ -118,7 +127,7 @@ Pagination.prototype.refresh = function(){
 	var page_data = this.calculate_args();
 
 	this.container.innerHTML = "一共" + this.total + "条记录 " + this.total_page + "页";
-	console.log(this.container.innerHTML);
+
 	// 显示首页
 	if(this.display_home){
 		this.create_button(1, this.current_page !== 1, this.home_page_name);
@@ -138,10 +147,10 @@ Pagination.prototype.refresh = function(){
 	}
 
 	// 显示页码后的省略号
-	if(page_data['end'] !== this.total_page){
+	if(page_data['end'] != this.total_page){
 		this.create_button(undefined, false, this.omit_name);
 	}
-	
+
 	// 下一页
 	this.create_button(page_data['next'], this.current_page !== this.total_page, this.next_page_name);
 
@@ -161,19 +170,19 @@ Pagination.prototype.refresh = function(){
  * @author JunEnstein
  * @param {number}  page_number 按钮的序号(当且仅当clickable为true有效)
  * @param {boolean} clickable   是否可以点击(默认为true)
- * @param {string}  content     按钮的文字(默认等于page_number)
+ * @param {string}  button_name 按钮的文字(默认等于page_number)
  */
-Pagination.prototype.create_button = function(page_number, clickable, content){
+Pagination.prototype.create_button = function(page_number, clickable, button_name){
 	// 默认参数值的初始化
 	if(clickable === undefined) clickable = true;
-	if(content === undefined) content = page_number;
+	if(button_name === undefined) button_name = page_number;
 
 	// 创建标签
 	var tag = "a";
 	if(!clickable) tag = "strong";
 	var page_button = document.createElement(tag);
 	page_button.href = "javascript:void(0);";
-	page_button.innerHTML = content;
+	page_button.innerHTML = button_name;
 	// 该按钮不能点击，直接返回button对象
 	if(!clickable){
 		// 追加到容器中
@@ -230,4 +239,23 @@ Pagination.prototype.create_skip = function(){
 	};
 	this.container.appendChild(input);
 	this.container.appendChild(button);
+};
+
+
+/**
+ * 将字符串类型转化为boolean
+ * @method parseBoolean
+ * @author JunEnstein
+ * @param  {String|Boolean}  original_value 
+ * @return {Boolean}   转化后的boolean变量
+ */
+Pagination.prototype.parseBoolean = function(original_value){
+	if(original_value === true) return true;
+	var result = false;
+	if(original_value.length > 0){
+		if(original_value.toLowerCase() === "true"){
+			result = true;
+		}
+	}
+	return result;
 };

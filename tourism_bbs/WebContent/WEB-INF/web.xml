@@ -210,7 +210,6 @@
     <servlet-name>checkUserNameServlet</servlet-name>
     <url-pattern>/checkUserName</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>showMyCollectionServlet</servlet-name>
     <servlet-class>com.tourism_bbs.servlet.ShowMyCollectionServlet</servlet-class>
@@ -218,5 +217,22 @@
   <servlet-mapping>
     <servlet-name>showMyCollectionServlet</servlet-name>
     <url-pattern>/showMyCollection</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>showPostListByConditionServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowPostListByCondition</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showPostListByConditionServlet</servlet-name>
+    <url-pattern>/showPostListByCondition</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>showMyAttentionServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowMyAttentionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showMyAttentionServlet</servlet-name>
+    <url-pattern>/showMyAttention</url-pattern>
   </servlet-mapping>
 </web-app>

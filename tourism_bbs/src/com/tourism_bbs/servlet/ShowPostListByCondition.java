@@ -15,15 +15,13 @@ import com.tourism_bbs.bean.PostListBean;
 
 
 
-public class ChangePostListByPageServlet extends HttpServlet {
+public class ShowPostListByCondition extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//获取从页面中传递的第几页信息To do:
-		String pageNo=request.getParameter("pageNo");
-		request.setAttribute("currentPage", pageNo);
+		int pageNo=1;
 		HttpSession session=request.getSession();
-		
+		request.setAttribute("currentPage", pageNo);
 		Object searchObject=request.getParameter("search");
 		Object searchSession=session.getAttribute("search");
 		Object orderObject=request.getParameter("order");

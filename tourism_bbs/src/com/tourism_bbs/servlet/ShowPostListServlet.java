@@ -22,7 +22,7 @@ public class ShowPostListServlet extends HttpServlet {
 		int pageNo=1;
 		String forward;
 		request.setAttribute("currentPage", pageNo);
-		
+		HttpSession session=request.getSession();
 		PostListBean postListBean=new PostListBean();
 		ArrayList<PostListBean> postList=new ArrayList<PostListBean>();
 		String sql="select * from post_user_view order by postId desc";
@@ -32,14 +32,16 @@ public class ShowPostListServlet extends HttpServlet {
 			int pageCount=postListBean.getPageCount(sql);
 			request.setAttribute("pageCount",pageCount);
 			request.setAttribute("postList", postList);
-			
+			session.removeAttribute("search");
+			session.removeAttribute("order");
+			session.removeAttribute("style");
 			
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		HttpSession session=request.getSession();
+		
 		Object userid=session.getAttribute("userid");
 		
 		

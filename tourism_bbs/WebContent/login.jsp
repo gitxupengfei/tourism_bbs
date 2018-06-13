@@ -37,6 +37,7 @@
 		background-color: blue;
 		color:white;
 		font-weight: bolder;
+		cursor: pointer;
 	}
 	#word1,#word2{
 		valign:middle;
@@ -46,6 +47,7 @@
 		text-decoration: none;
 		color:blue;
 	    font-size:3px;
+	    cursor: pointer;
 	}
 	
 </style>

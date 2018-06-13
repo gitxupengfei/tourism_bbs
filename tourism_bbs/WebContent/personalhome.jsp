@@ -17,7 +17,7 @@ $(document).ready(function(){
 });
 </script>
 <style type="text/css">
-	#order{
+	#order_div{
 		background-image: url("images/line.PNG");
 		height: 50px;
 		padding-left: 3%;
@@ -49,7 +49,7 @@ $(document).ready(function(){
 		height: 25px;
 		position:absolute;
 		right: 50px;
-	
+		cursor: pointer;
 	}
 	
 	#content{
@@ -163,25 +163,38 @@ $(document).ready(function(){
 		margin-bottom: 40px;
 	}
 	
-	
+	#search_result{
+		margin-left: 5%;
+		display: none;
+		margin-bottom: 20px;
+		width: 90%;
+		border-bottom: 2px solid gray;
+		padding-bottom: 20px;
+	}
+	#result_note{
+		font-weight: bolder;
+		
+		
+		
+	}
 </style>
 </head>
 <body>
 	<div>
 	<jsp:include page="personal_head.jsp"></jsp:include>
     </div>
-	<div id="order" >
+	<div id="order_div" >
 	
 	<span id="select_span">
-	排序方式：<select name="order" class="select">
-				<option value="no" selected="selected">无排序</option>
+	排序方式：<select name="order" class="select" id="order" onchange="order()">
+				<option value="time" selected="selected">时间</option>
 				<option value="hot">热度</option>
 				<option value="great">好评</option>
 				<option value="famous">名家</option>
 		</select>
 	&nbsp;&nbsp;&nbsp;&nbsp;
-	出行方式：<select name="style" class="select">
-				<option value="any" selected="selected">任何方式</option>
+	出行方式：<select name="style" class="select" id="style" onchange="styleChange()">
+				<option value="any" selected="selected" >任何方式</option>
 				<option value="foot">步行</option>
 				<option value="bike">自行车</option>
 				<option value="bus">汽车</option>
@@ -192,10 +205,13 @@ $(document).ready(function(){
 			</select>
 </span>
 			<input type="text" name="search_text" id="search_text">
-			<img alt="button" src="images/search.jpg" title="点击搜索" id="search_btn">
+			<img alt="button" src="images/search.jpg" title="点击搜索" id="search_btn" onclick="search()">
 </div>
 	
-	
+	<!-- 搜索结果提示内容 -->
+	<div id="search_result">
+		和“<label id="result_note" ></label>”相关的帖子如下：
+	</div>
 	
 	
 	
@@ -250,9 +266,10 @@ $(document).ready(function(){
 		</tr>
 	</table>
 	</c:forEach>
-	</div>
+	
 	<div id="page">
 	<div id="pagination" class="pagination"></div>
+	</div>
 	</div>
 </body>
 <script type="text/javascript">
@@ -269,6 +286,44 @@ var config = {
 			    if(statusTxt=="error")
 			      alert("系统异常！请稍后再试");
 		});
+	};
+	//搜索
+	function search(){
+		var search=$("#search_text").val();
+		$("#postListDiv").load("showPostListByCondition", {"search":search}, function(data, statusTxt,xhr){
+			
+		    if(statusTxt=="error")
+		      alert("系统异常！请稍后再试");
+	});
+		$("#result_note").text(search);
+		$("#search_result").show();
+		$("#order").val("time");
+		$("#style").val("any");
+	}
+	
+	//排序
+	function order(){
+		var order=$("#order option:selected").val();
+		
+		$("#postListDiv").load("showPostListByCondition", {"order":order}, function(data, statusTxt,xhr){
+			
+		    if(statusTxt=="error")
+		      alert("系统异常！请稍后再试");
+	});
+		
+		
+	};
+	
+	//出行方式
+	function styleChange(){
+		var style=$("#style option:selected").val();
+		$("#postListDiv").load("showPostListByCondition", {"style":style}, function(data, statusTxt,xhr){
+			
+		    if(statusTxt=="error")
+		      alert("系统异常！请稍后再试");
+	});
+		
+		
 	};
 </script>
 </html>

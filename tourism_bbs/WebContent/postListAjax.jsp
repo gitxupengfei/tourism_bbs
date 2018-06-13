@@ -17,21 +17,22 @@ function init(){
 	window.onload=init;
 </c:if>
 
-function readMore(){
-	alert("查看详细信息，请先登录！");
+function readMore(postId,postUserId){
+	
+
+	var userid=<%=session.getAttribute("userid")%>;
+	if(userid==null){
+		alert("查看详细信息，请先登录！");
+	}
+	else 
+		 window.top.location='showPostDetail?postId='+postId+'&postUserId='+postUserId;
 }
 
 
 </script>
 <style type="text/css">
 
-	#order{
-		background-image: url("images/line.PNG");
-		height: 50px;
-		padding-left: 3%;
-		padding-top: 15px;
-		
-	}
+	
 
 
 	.select{
@@ -211,7 +212,7 @@ function readMore(){
 		</tr>
 		<tr height="50px"></tr>
 		<tr >
-			<td ><div id="readmore" onclick="readMore()"><a href="javascript:;" id="read_a" class="a2" title="点击查看详细内容">>>READ &nbsp;&nbsp;MORE</a></div></td>
+			<td ><div id="readmore" onclick="readMore(${post.postId},${post.postUserId })"><a href="javascript:;" id="read_a" class="a2" title="点击查看详细内容">>>READ &nbsp;&nbsp;MORE</a></div></td>
 			<td>
 			<span id="zxj1">
 			<a href="javascript:;" id="style_a" class="a3"><label id="style_label" title="点击查看更多同方式帖子">${post.styleLabel}</label></a>

@@ -9,7 +9,7 @@
 <script src="jquery-3.3.1.js"></script>
 <script type="text/javascript">
 	function init(){
-		var post='<%=request.getAttribute("myPosts")%>';
+		var post='<%=request.getAttribute("collection")%>';
 		var posting=document.getElementById("none");
 		if(post=='[]'){
 			posting.style.display="block";
