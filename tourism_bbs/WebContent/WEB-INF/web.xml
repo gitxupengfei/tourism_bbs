@@ -242,4 +242,20 @@
     <servlet-name>showUserAdminServlet</servlet-name>
     <url-pattern>/showUserAdmin</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>adminOperationServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.AdminOperationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>adminOperationServlet</servlet-name>
+    <url-pattern>/adminOperation</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>showPostAdminServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowPostAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showPostAdminServlet</servlet-name>
+    <url-pattern>/showPostAdmin</url-pattern>
+  </servlet-mapping>
 </web-app>

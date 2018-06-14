@@ -613,6 +613,61 @@ public class UserBean {
 		
 	}
 	
+	/**
+	 *@Description£ºstatus+1
+	 *@param userId: void
+	 *@Author:xupengfei
+	 */
+	public void addStatus(String userId){
+		Connection con=null;
+		DBBean dbBean=new DBBean();
+		String sql="update user_table set status=status+1 where userId='"+userId+"'";
+		con=dbBean.getConnection();
+		try {
+			dbBean.executeUpdate(sql);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				dbBean.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
+	/**
+	 *@Description£ºstatus-1
+	 *@param userId: void
+	 *@Author:xupengfei
+	 */
+	public void subStatus(String userId){
+		Connection con=null;
+		DBBean dbBean=new DBBean();
+		String sql="update user_table set status=status-1 where userId='"+userId+"'";
+		con=dbBean.getConnection();
+		try {
+			dbBean.executeUpdate(sql);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				dbBean.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 	
 	public int getUserId() {
 	return userId;

@@ -5,23 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>大学生旅游旅游论坛管理员界面</title>
+<title>Insert title here</title>
 <link href="pagination.css" rel="stylesheet">
 <script src="pagination.js"></script>
 <script src="jquery-3.3.1.js"></script>
 <script type="text/javascript">
-	function init(){
-		var adminId='<%=session.getAttribute("adminId")%>';
-		if(adminId=='null'){
-			window.location.href='home';
-		}
-	}
 	
-	function exit(){
-		if(confirm('您确定要退出管理员模式吗?')){
-			window.location.href='home';
-		}
-	}
 </script>
 <style type="text/css">
 body{
@@ -154,31 +143,15 @@ body{
 	}
  </style>
 </head>
-<body onload="init()">
-	<div id="body"  >
-  <div id="head">
-	<input type="button" title="点击退出登录" id="exit" value="退出" onclick="exit()">
-	</div>
-	<img alt="大学生旅游论坛" src="images/admin_head.jpg" id="headbg">
-	</div>
-	<div id="guide">
-	<div id="user" class="item" onclick="userAdmin()">用户管理</div>
-	<div id="post" class="item" onclick="postAdmin()">帖子管理</div>
-	</div>
-	<div id="content">
-	<div id="line" >
-    	用户ID：<input type="text" name="userIdText" id="input_userId">
-    	用户名：<input type="text" name="userNameText" id="input_userName">
-    	<input type="button" id="query_btn" value="查询" onclick="query()">
-  </div>
-  <div id="table_div">
+<body>
+	<div id="table_div">
    <table class="imagetable" align="center">
 <tr>
 	<th>用户ID</th><th>用户名</th><th>手机</th><th>QQ</th><th>等级</th><th>Status</th><th></th>
 </tr>
 <c:forEach var="user" items="${userList}">
 <tr>
-	<td>${user.userId}</td><td>${user.userName }</td><td>${user.telephone }</td><td>${user.QQ }</td><td>V${user.level}</td><td>${user.status }</td><td><input type="button" value="▲" class="c" id="add" title="加一" onclick="add(${user.userId},${user.status})"><input type="button" value="▼" class="c" id="sub" title="减一" onclick="sub(${user.userId},${user.status})"></td>
+	<td>${user.userId }</td><td>${user.userName }</td><td>${user.telephone }</td><td>${user.QQ }</td><td>V${user.level}</td><td>${user.status }</td><td><input type="button" value="▲" class="c" id="add" title="加一" onclick="add(${user.userId},${user.status })"><input type="button" value="▼" class="c" id="sub" title="减一" onclick="sub(${user.userId},${user.status })"></td>
 </tr>
 </c:forEach>
 </table>
@@ -187,8 +160,6 @@ body{
 	<div id="pagination" class="pagination"></div>
 	</div>
   </div>
-	</div>
-	
 </body>
 <script type="text/javascript">
 var config = {
@@ -206,38 +177,6 @@ var config = {
 			      alert("系统异常！请稍后再试");
 		});
 	};
-	
-	$("#input_userName").blur(function (){
-		var userName=$("#input_userName").val();
-		if(userName.trim()!=""){
-			$("#input_userId").attr("readonly", "readonly");
-		}
-		else $("#input_userId").removeAttr("readonly");
-	});
-	$("#input_userId").blur(function (){
-		var userId=$("#input_userId").val();
-		
-		if(userId.trim()!=""){
-			$("#input_userName").attr("readonly", "readonly");
-		}
-		else $("#input_userName").removeAttr("readonly");
-	});
-	
-	function query(){
-		var userId=$("#input_userId").val();
-		var userName=$("#input_userName").val();
-		if(userId!="" || userName!=""){
-		$("#table_div").load("showUserAdmin", {"userId":userId,"userName":userName}, function(data, statusTxt,xhr){
-			
-			
-		    if(statusTxt=="error")
-		      alert("系统异常！请稍后再试");
-	});
-		}
-		else {
-			alert("查询前请输入用户ID或者用户名！")
-		}
-	}
 	
 	function add(userId,status){
 		var pageNo='<%=request.getAttribute("currentPage")%>';
@@ -262,14 +201,6 @@ var config = {
 		});
 		}
 		else alert("该用户的信誉值已达到下限，不能下降！");
-		
-	}
-	
-	function userAdmin(){
-		window.location.href='showUserAdmin';
-	}
-	function postAdmin(){
-		window.location.href='showPostAdmin';
 		
 	}
 </script>

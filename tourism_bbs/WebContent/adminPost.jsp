@@ -124,15 +124,14 @@ body{
 	}
 	.c{
 		width:40px;
-		height: 30px;
+		height: 25px;
 		margin-bottom: 5px;
 		margin-left: 5px;
-		font-size: large;
 		font-weight: bolder;
 		color:  gray;
 		cursor: pointer;
 	}
-	#input_userId{
+	#input_postId{
 		width: 80px;
 		margin-right: 100px;
 	}
@@ -167,18 +166,18 @@ body{
 	</div>
 	<div id="content">
 	<div id="line" >
-    	用户ID：<input type="text" name="userIdText" id="input_userId">
-    	用户名：<input type="text" name="userNameText" id="input_userName">
+    	帖子ID：<input type="text" name="postIdText" id="input_postId">
+    	帖子作者：<input type="text" name="userNameText" id="input_userName">
     	<input type="button" id="query_btn" value="查询" onclick="query()">
   </div>
   <div id="table_div">
    <table class="imagetable" align="center">
 <tr>
-	<th>用户ID</th><th>用户名</th><th>手机</th><th>QQ</th><th>等级</th><th>Status</th><th></th>
+	<th>帖子ID</th><th>作者</th><th>标题</th><th>收藏数</th><th>评论数</th><th>发帖时间</th><th></th>
 </tr>
-<c:forEach var="user" items="${userList}">
+<c:forEach var="post" items="${postList}">
 <tr>
-	<td>${user.userId}</td><td>${user.userName }</td><td>${user.telephone }</td><td>${user.QQ }</td><td>V${user.level}</td><td>${user.status }</td><td><input type="button" value="▲" class="c" id="add" title="加一" onclick="add(${user.userId},${user.status})"><input type="button" value="▼" class="c" id="sub" title="减一" onclick="sub(${user.userId},${user.status})"></td>
+	<td>${post.postId }</td><td>${post.userName }</td><td>${post.title }</td><td>${post.postCollectionNum }</td><td>${post.postCommentNum}</td><td>${post.postTime }</td><td><input type="button" value="删除" class="c" id="delete" title="删除帖子" onclick="deletePost(${post.postId})"></td>
 </tr>
 </c:forEach>
 </table>
@@ -200,34 +199,35 @@ var config = {
 	var pagination = new Pagination('pagination', config);
 	pagination.onchange = function(page){
 		
-		$("#table_div").load("showUserAdmin", {"pageNo":page}, function(data, statusTxt,xhr){
+		$("#table_div").load("showPostAdmin", {"pageNo":page}, function(data, statusTxt,xhr){
 			
 			    if(statusTxt=="error")
 			      alert("系统异常！请稍后再试");
 		});
 	};
 	
-	$("#input_userName").blur(function (){
+	$("#input_userName").blur(function(){
 		var userName=$("#input_userName").val();
+		console.log(userName);
 		if(userName.trim()!=""){
-			$("#input_userId").attr("readonly", "readonly");
+			$("#input_postId").attr("readonly", "readonly");
 		}
-		else $("#input_userId").removeAttr("readonly");
+		else $("#input_postId").removeAttr("readonly");
 	});
-	$("#input_userId").blur(function (){
-		var userId=$("#input_userId").val();
-		
-		if(userId.trim()!=""){
-			$("#input_userName").attr("readonly", "readonly");
+	
+	$("#input_postId").blur(function(){
+		var postId=$("#input_postId").val();
+		if(postId.trim()!=""){
+			$("#input_userName").attr("readonly","readonly");
 		}
 		else $("#input_userName").removeAttr("readonly");
 	});
 	
 	function query(){
-		var userId=$("#input_userId").val();
+		var postId=$("#input_postId").val();
 		var userName=$("#input_userName").val();
-		if(userId!="" || userName!=""){
-		$("#table_div").load("showUserAdmin", {"userId":userId,"userName":userName}, function(data, statusTxt,xhr){
+		if(postId!="" || userName!=""){
+		$("#table_div").load("showPostAdmin", {"postId":postId,"userName":userName}, function(data, statusTxt,xhr){
 			
 			
 		    if(statusTxt=="error")
@@ -235,33 +235,23 @@ var config = {
 	});
 		}
 		else {
-			alert("查询前请输入用户ID或者用户名！")
+			alert("查询前请输入帖子ID或者帖子作者！")
 		}
 	}
 	
-	function add(userId,status){
-		var pageNo='<%=request.getAttribute("currentPage")%>';
-		if(status<3){
-			$("#table_div").load("adminOperation", {"userId":userId,"pageNo":pageNo,"style":"add"}, function(data, statusTxt,xhr){
-				
-				if(statusTxt=="success") alert("修改成功！");
-			    if(statusTxt=="error")
-			      alert("系统异常！请稍后再试");
-		});
+	function deletePost(postId){
+		if(confirm('您确定要删除该帖子?')){
+			var pageNo='<%=request.getAttribute("currentPage")%>';
+			
+				$("#table_div").load("adminOperation", {"postId":postId,"pageNo":pageNo,"style":"delete"}, function(data, statusTxt,xhr){
+					
+					if(statusTxt=="success") alert("删除成功！");
+				    if(statusTxt=="error")
+				      alert("系统异常！请稍后再试");
+			});
+			
+			
 		}
-		else alert("该用户的信誉值已达到上限，不能上升！");
-	}
-	function sub(userId,status){
-		var pageNo='<%=request.getAttribute("currentPage")%>';
-		if(status>0){
-			$("#table_div").load("adminOperation", {"userId":userId,"pageNo":pageNo,"style":"sub"}, function(data, statusTxt,xhr){
-				
-				if(statusTxt=="success") alert("修改成功！");
-			    if(statusTxt=="error")
-			      alert("系统异常！请稍后再试");
-		});
-		}
-		else alert("该用户的信誉值已达到下限，不能下降！");
 		
 	}
 	
