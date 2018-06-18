@@ -220,8 +220,8 @@ var config = {
 	};
 	var pagination = new Pagination('pagination', config);
 	pagination.onchange = function(page){
-		
-		$("#postListDiv").load("changePostListByPage", {"pageNo":page}, function(data, statusTxt,xhr){
+		var postId='<%=request.getAttribute("postId")%>';
+		$("#commentShow").load("showCheckedPost", {"pageNo":page,"postId":postId}, function(data, statusTxt,xhr){
 			
 			    if(statusTxt=="error")
 			      alert("系统异常！请稍后再试");

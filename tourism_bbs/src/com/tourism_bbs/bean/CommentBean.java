@@ -10,6 +10,7 @@ import java.util.Date;
 public class CommentBean {
 	private int commentId;
 	private int comFromUserId;
+	private String comFromUserName;
 	private int comToId;
 	private String comUserName;
 	private String comUserPhoto;
@@ -17,6 +18,12 @@ public class CommentBean {
 	private String comContent;
 	private String comTime;
 	private int comStatus;
+	private String postTitle;
+	
+	/**
+	 * 评论的文章的作者id
+	 */
+	private int comToUserId;
 	
 	
 	/**
@@ -122,6 +129,57 @@ public class CommentBean {
 		
 		
 	}
+public ArrayList showCommentNote(String userId){
+		
+		Connection con=null;
+		ResultSet rs=null;
+		DBBean db=new DBBean();
+		ArrayList noteList=new ArrayList();
+		String sql="select * from commentnote_view where comToUserId='"+userId+"' order by commentId desc";
+		
+		try {
+			con=db.getConnection();
+			rs=db.executeQuery(sql);
+			while(rs.next()){
+				
+				int commentId=rs.getInt(1);
+				String comFromUserName=rs.getString(2);
+				int comToUserId=rs.getInt(3);
+				String postTitle=rs.getString(4);
+				String comContent=rs.getString(5);
+				String comTime=rs.getString(6);
+				CommentBean comment=new CommentBean();
+				comment.setCommentId(commentId);
+				comment.setComFromUserName(comFromUserName);
+				comment.setComToUserId(comToUserId);
+				comment.setPostTitle(postTitle);
+				comment.setComContent(comContent);
+				comment.setComTime(comTime);
+				
+				noteList.add(comment);
+				
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				db.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return noteList;
+		
+
+		
+		
+	}
 
 	/**
 	 *@Description：删除评论
@@ -217,6 +275,30 @@ public class CommentBean {
 	}
 	public void setComStatus(int comStatus) {
 		this.comStatus = comStatus;
+	}
+
+	public String getComFromUserName() {
+		return comFromUserName;
+	}
+
+	public void setComFromUserName(String comFromUserName) {
+		this.comFromUserName = comFromUserName;
+	}
+
+	public String getPostTitle() {
+		return postTitle;
+	}
+
+	public void setPostTitle(String postTitle) {
+		this.postTitle = postTitle;
+	}
+
+	public int getComToUserId() {
+		return comToUserId;
+	}
+
+	public void setComToUserId(int comToUserId) {
+		this.comToUserId = comToUserId;
 	}
 	
 

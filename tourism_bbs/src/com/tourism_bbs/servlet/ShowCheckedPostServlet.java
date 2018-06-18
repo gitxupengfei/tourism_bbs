@@ -19,24 +19,41 @@ public class ShowCheckedPostServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Object pageObj=request.getParameter("pageNo");
+		int pageNo;
 		String postId=request.getParameter("postId");
 		ArrayList commentList=new ArrayList();
 		CommentBean comment=new CommentBean();
+		String forward = null;
 		PostBean postBean=new PostBean();
+		if(pageObj!=null){
+			pageNo=Integer.parseInt(pageObj.toString());
+			forward="commentAjax.jsp";
+			commentList=comment.showComment(pageNo, postId);
+			request.setAttribute("commentList", commentList);
+			
+		}
+		else{
+			pageNo=1;
+		
 		try {
 			PostBean post=new PostBean();
 			post=postBean.showMyPostDetail(postId);
 			commentList=comment.showComment(1, postId);
+			int postid=post.getPostId();
+			request.setAttribute("postId", postid);
 			request.setAttribute("commentList", commentList);
 			request.setAttribute("currentPage", 1);
 			request.setAttribute("pageCount", comment.getCommentCount(postId));
 			request.setAttribute("post", post);
-			RequestDispatcher rd=request.getRequestDispatcher("postdetail.jsp");
-			rd.forward(request, response);
+			forward="postdetail.jsp";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
+		RequestDispatcher rd=request.getRequestDispatcher(forward);
+		rd.forward(request, response);
 	}
 
 

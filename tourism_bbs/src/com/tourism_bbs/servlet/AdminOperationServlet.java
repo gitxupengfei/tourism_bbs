@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.tourism_bbs.bean.PostBean;
 import com.tourism_bbs.bean.PostListBean;
+import com.tourism_bbs.bean.SystemNoteBean;
 import com.tourism_bbs.bean.UserBean;
 
 
@@ -64,10 +65,18 @@ public class AdminOperationServlet extends HttpServlet {
 		
 		else if(style.equals("delete")){
 			String postId=postIdObj.toString();
+			int postid=Integer.parseInt(postId);
+			int userId=Integer.parseInt(request.getParameter("userId"));
+			String title=request.getParameter("title");
 			PostBean post=new PostBean();
 			PostListBean postListBean=new PostListBean();
+			SystemNoteBean system=new SystemNoteBean();
+			system.setPostId(postid);
+			system.setUserId(userId);
+			system.setTitle(title);
 			try {
 				post.deleteMyPost(postId);
+				system.addNote();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

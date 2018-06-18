@@ -147,7 +147,7 @@
 		</tr>
 		<tr>
 			<td colspan="3">
-				<input type="submit" value="发布" id="posting_button">
+				<input type="submit" value="发表" id="posting_button">
 			</td>
 		</tr>
 	</table>

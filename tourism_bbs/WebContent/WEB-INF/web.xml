@@ -250,12 +250,20 @@
     <servlet-name>adminOperationServlet</servlet-name>
     <url-pattern>/adminOperation</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>showPostAdminServlet</servlet-name>
     <servlet-class>com.tourism_bbs.servlet.ShowPostAdminServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>showPostAdminServlet</servlet-name>
     <url-pattern>/showPostAdmin</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>showNoteServlet</servlet-name>
+    <servlet-class>com.tourism_bbs.servlet.ShowNoteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showNoteServlet</servlet-name>
+    <url-pattern>/showNote</url-pattern>
   </servlet-mapping>
 </web-app>

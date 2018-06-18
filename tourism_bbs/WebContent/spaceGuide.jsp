@@ -88,7 +88,7 @@
 <tr height="20px" ><td></td></tr>
 <tr height="30px" bgcolor="#0066FF"><td><a  href="http://localhost:8080/tourism_bbs/showMyAttention" target="spaceRight" class="space_a">我的关注</a></td></tr>
 <tr height="20px" ><td></td></tr>
-<tr height="30px" bgcolor="#0066FF"><td>我需留意&nbsp;&nbsp;&nbsp;<label id="redPoint">*</label></td></tr>
+<tr height="30px" bgcolor="#0066FF"><td><a  href="http://localhost:8080/tourism_bbs/showNote" target="spaceRight" class="space_a">我需留意</a></td></tr>
 <tr height="20px" ><td></td></tr>
 
 </table>

@@ -177,7 +177,7 @@ body{
 </tr>
 <c:forEach var="post" items="${postList}">
 <tr>
-	<td>${post.postId }</td><td>${post.userName }</td><td>${post.title }</td><td>${post.postCollectionNum }</td><td>${post.postCommentNum}</td><td>${post.postTime }</td><td><input type="button" value="删除" class="c" id="delete" title="删除帖子" onclick="deletePost(${post.postId})"></td>
+	<td>${post.postId }</td><td>${post.userName }</td><td>${post.title }</td><td>${post.postCollectionNum }</td><td>${post.postCommentNum}</td><td>${post.postTime }</td><td><input type="button" value="删除" class="c" id="delete" title="删除帖子" onclick="deletePost(${post.postId},${post.postUserId},'${post.title}')"></td>
 </tr>
 </c:forEach>
 </table>
@@ -239,11 +239,11 @@ var config = {
 		}
 	}
 	
-	function deletePost(postId){
+	function deletePost(postId,userId,postTitle){
 		if(confirm('您确定要删除该帖子?')){
 			var pageNo='<%=request.getAttribute("currentPage")%>';
 			
-				$("#table_div").load("adminOperation", {"postId":postId,"pageNo":pageNo,"style":"delete"}, function(data, statusTxt,xhr){
+				$("#table_div").load("adminOperation", {"postId":postId,"pageNo":pageNo,"userId":userId,"title":postTitle,"style":"delete"}, function(data, statusTxt,xhr){
 					
 					if(statusTxt=="success") alert("删除成功！");
 				    if(statusTxt=="error")

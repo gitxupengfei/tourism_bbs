@@ -1,7 +1,10 @@
 package com.tourism_bbs.bean;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.sun.org.apache.xerces.internal.impl.dv.DVFactoryException;
@@ -10,6 +13,7 @@ public class LeaveWordsBean {
 	private int leaveWordsId;
 	private int leaveFromUserId;
 	private int leaveToUserId;
+	private String leaveFromUserName;
 	private String leaveWords;
 	private String leaveTime;
 	private int leaveStatus;
@@ -42,7 +46,62 @@ public class LeaveWordsBean {
 		dbBean.close();
 	}
 	
-	
+	/**
+	 *@Description£∫’π æ¡Ù—‘
+	 *@param userid
+	 *@return: ArrayList
+	 *@Author:xupengfei
+	 */
+	public ArrayList showLeaveWords(String userid){
+		
+		Connection con=null;
+		ResultSet rs=null;
+		DBBean db=new DBBean();
+		ArrayList noteList=new ArrayList();
+		String sql="select *  from leave_view where leaveToUserId='"+userid+"' order by leaveWordsId desc";
+		
+		try {
+			con=db.getConnection();
+			rs=db.executeQuery(sql);
+			while(rs.next()){
+				int leaveWordsId=rs.getInt(1);
+				String leaveFromUserName=rs.getString(2);
+				int leaveToUserId=rs.getInt(3);
+				String leaveWords=rs.getString(4);
+				String leaveTime=rs.getString(5);
+				int leaveStatus=rs.getInt(6);
+				LeaveWordsBean note=new LeaveWordsBean();
+				note.setLeaveWordsId(leaveWordsId);
+				note.setLeaveFromUserName(leaveFromUserName);
+				note.setLeaveToUserId(leaveToUserId);
+				note.setLeaveWords(leaveWords);
+				note.setLeaveTime(leaveTime);
+				note.setLeaveStatus(leaveStatus);
+				noteList.add(note);
+				
+				
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				db.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return noteList;
+		
+
+		
+		
+	}
 	
 	public int getLeaveWordsId() {
 		return leaveWordsId;
@@ -80,5 +139,18 @@ public class LeaveWordsBean {
 	public void setLeaveStatus(int leaveStatus) {
 		this.leaveStatus = leaveStatus;
 	}
+
+
+
+	public String getLeaveFromUserName() {
+		return leaveFromUserName;
+	}
+
+
+
+	public void setLeaveFromUserName(String leaveFromUserName) {
+		this.leaveFromUserName = leaveFromUserName;
+	}
+	
 	
 }
